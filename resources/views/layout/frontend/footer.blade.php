@@ -131,7 +131,7 @@
                         Festival Offers Going On..
                     </p>
                     <h5 class="mt-30">We Accept</h5>
-                    <img src="img/icons/payment-4.png" alt="Payment Image">
+                    <img src="{{ asset('assets/frontend/img/icons/payment-4.png') }}" alt="Payment Image">
                 </div>
             </div>
         </div>
