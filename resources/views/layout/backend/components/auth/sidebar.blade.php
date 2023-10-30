@@ -39,16 +39,15 @@
                     </div>
                   </li>
                     <li class="sidebar-list"><i class="fa fa-thumb-tack">    </i>
-                        <label class="badge badge-light-secondary">New</label><a class="sidebar-link sidebar-title" href="#">
+                        <a class="sidebar-link sidebar-title" href="#">
                         <svg class="stroke-icon">
-                            <use href="../assets/svg/icon-sprite.svg#stroke-project"></use>
+                            <use href="{{ asset('assets/backend/svg/icon-sprite.svg#stroke-calendar') }}"></use>
                         </svg>
                         <svg class="fill-icon">
-                            <use href="../assets/svg/icon-sprite.svg#fill-project"></use>
+                            <use href="{{ asset('assets/backend/svg/icon-sprite.svg#stroke-calendar') }}"></use>
                         </svg><span>Plot Booking           </span></a>
                         <ul class="sidebar-submenu">
-                        <li><a href="{{ route('booking.index') }}">Booking List</a></li>
-                        <li><a href="projectcreate.html">Create new</a></li>
+                        <li><a href="{{ route('booking.index') }}">Booking</a></li>
                         </ul>
                   </li>
                     <li class="sidebar-list">
