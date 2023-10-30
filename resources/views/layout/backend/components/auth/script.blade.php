@@ -32,6 +32,9 @@
     <script src="{{ asset('assets/backend/js/typeahead-search/typeahead-custom.js') }}"></script>
     <script src="{{ asset('assets/backend/js/height-equal.js') }}"></script>
     <script src="{{ asset('assets/backend/js/animation/wow/wow.min.js') }}"></script>
+
+    <script src="{{ asset('assets/backend/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/datatable/datatables/datatable.custom.js') }}"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{ asset('assets/backend/js/script.js') }}"></script>
