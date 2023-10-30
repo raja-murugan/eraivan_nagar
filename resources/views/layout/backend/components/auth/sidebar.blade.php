@@ -54,7 +54,7 @@
                   </li>
                     <li class="sidebar-list">
                         <i class="fa fa-thumb-tack"></i>
-                        <a class="sidebar-link sidebar-title link-nav" href="letter-box.html">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('plot.index') }}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/backend/svg/icon-sprite.svg#stroke-maps') }}"></use>
                             </svg>
@@ -66,7 +66,7 @@
                     </li>
                     <li class="sidebar-list">
                         <i class="fa fa-thumb-tack"></i>
-                        <a class="sidebar-link sidebar-title link-nav" href="letter-box.html">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('reference.index') }}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/backend/svg/icon-sprite.svg#stroke-user') }}"></use>
                             </svg>
