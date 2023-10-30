@@ -6,6 +6,11 @@
 </head>
 
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-58C9WCXS" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <!--[if lte IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
@@ -77,14 +82,17 @@
                                                         </div>
                                                     </form>
                                                     <div>
-                                                        <h6 class="text-color-white--- text-center mb-10">Want to reach us
-                                                            <span class="ltn__secondary-color-3">directly</span> through WhatsApp?
+                                                        <h6 class="text-color-white--- text-center mb-10">Want to reach
+                                                            us
+                                                            <span class="ltn__secondary-color-3">directly</span> through
+                                                            WhatsApp?
                                                         </h6>
                                                         <a href="https://api.whatsapp.com/send/?phone=%2B919159435943&text&type=phone_number&app_absent=0"
                                                             target="_blank">
-                                                            <button type="submit" style="border-radius: 200px; padding: 10px 40px !important;"
+                                                            <button type="submit"
+                                                                style="border-radius: 200px; padding: 10px 40px !important;"
                                                                 class="btn theme-btn-1 btn-effect-1 text-uppercase">
-                                                               chat on whatsapp</button></a>
+                                                                chat on whatsapp</button></a>
                                                     </div>
                                                 </div>
                                             </div>
