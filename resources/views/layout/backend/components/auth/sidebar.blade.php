@@ -34,6 +34,24 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+                    <li class="sidebar-main-title">
+                    <div>
+                      <h6 class="lan-8">Applications</h6>
+                    </div>
+                  </li>
+                    <li class="sidebar-list"><i class="fa fa-thumb-tack">    </i>
+                        <label class="badge badge-light-secondary">New</label><a class="sidebar-link sidebar-title" href="#">
+                        <svg class="stroke-icon">
+                            <use href="../assets/svg/icon-sprite.svg#stroke-project"></use>
+                        </svg>
+                        <svg class="fill-icon">
+                            <use href="../assets/svg/icon-sprite.svg#fill-project"></use>
+                        </svg><span>Plot Booking           </span></a>
+                        <ul class="sidebar-submenu">
+                        <li><a href="{{ route('booking.index') }}">Booking List</a></li>
+                        <li><a href="projectcreate.html">Create new</a></li>
+                        </ul>
+                  </li>
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
