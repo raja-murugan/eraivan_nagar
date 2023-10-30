@@ -20,6 +20,7 @@ class Booking extends Model
         'mobileno',
 
         'idproofone',
+        'idproof_no',
         'proofimage_one',
         'idprooftwo',
         'proofimage_two',
@@ -27,6 +28,7 @@ class Booking extends Model
         'street',
         'area',
         'city',
+        'pincode',
         'dateof_site_visit',
         'reference',
     ];

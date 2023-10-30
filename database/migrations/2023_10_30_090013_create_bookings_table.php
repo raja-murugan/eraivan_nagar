@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('husbandname')->nullable();
             $table->string('mobileno')->nullable();
             $table->string('idproofone')->nullable();
+            $table->string('idproof_no')->nullable();
             $table->longText('proofimage_one')->nullable();
             $table->string('idprooftwo')->nullable();
             $table->longText('proofimage_two')->nullable();
@@ -31,6 +32,7 @@ return new class extends Migration
             $table->string('street')->nullable();
             $table->string('area')->nullable();
             $table->string('city')->nullable();
+            $table->string('pincode')->nullable();
             $table->string('dateof_site_visit')->nullable();
             $table->unsignedBigInteger('reference');
             $table->timestamps();
