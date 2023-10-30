@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PlotController;
 use App\Http\Controllers\ReferenceController;
@@ -22,35 +23,27 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
-
-
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-
-
     // BOOKING CONTROLLER
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         // INDEX
-        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktechnology/booking', [BookingController::class, 'index'])->name('booking.index');
+        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/booking', [BookingController::class, 'index'])->name('booking.index');
         // CREATE
-        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktechnology/booking/create', [BookingController::class, 'create'])->name('booking.create');
+        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/booking/create', [BookingController::class, 'create'])->name('booking.create');
         // STORE
-        Route::middleware(['auth:sanctum', 'verified'])->post('/zworktechnology/booking/store', [BookingController::class, 'store'])->name('booking.store');
+        Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/booking/store', [BookingController::class, 'store'])->name('booking.store');
         // EDIT
-        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktechnology/booking/edit/{unique_key}', [BookingController::class, 'edit'])->name('booking.edit');
+        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/booking/edit/{unique_key}', [BookingController::class, 'edit'])->name('booking.edit');
         // UPDATE
-        Route::middleware(['auth:sanctum', 'verified'])->put('/zworktechnology/booking/update/{unique_key}', [BookingController::class, 'update'])->name('booking.update');
+        Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/booking/update/{unique_key}', [BookingController::class, 'update'])->name('booking.update');
         // DELETE
-        Route::middleware(['auth:sanctum', 'verified'])->put('/zworktechnology/booking/delete/{unique_key}', [BookingController::class, 'delete'])->name('booking.delete');
+        Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/booking/delete/{unique_key}', [BookingController::class, 'delete'])->name('booking.delete');
         // DATAE FILTER
-        Route::middleware(['auth:sanctum', 'verified'])->put('/zworktechnology/booking/datefilter', [BookingController::class, 'datefilter'])->name('booking.datefilter');
+        Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/booking/datefilter', [BookingController::class, 'datefilter'])->name('booking.datefilter');
     });
-
-
 
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         // INDEX
@@ -73,6 +66,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         // DELETE
         Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/reference/delete/{unique_key}', [ReferenceController::class, 'delete'])->name('reference.delete');
     });
+
+    Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+        // INDEX
+        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/payment', [PaymentController::class, 'index'])->name('payment.index');
+        // STORE
+        Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/payment/store', [PaymentController::class, 'store'])->name('payment.store');
+        // EDIT
+        Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/payment/edit/{unique_key}', [PaymentController::class, 'edit'])->name('payment.edit');
+        // DELETE
+        Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/payment/delete/{unique_key}', [PaymentController::class, 'delete'])->name('payment.delete');
+    });
 });
-
-
