@@ -173,7 +173,7 @@
                         <div class="ltn__gallery-item-inner">
                             <div class="ltn__gallery-item-img">
                                 <a>
-                                    <img src="{{ asset('assets/frontend/img/gallery/9.png') }}" alt="Image">
+                                    <img src="{{ asset('assets/frontend/img/gallery/9.jpg') }}" alt="Image">
                                 </a>
                             </div>
                             <div class="ltn__gallery-item-info">
