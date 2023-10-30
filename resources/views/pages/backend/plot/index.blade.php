@@ -13,7 +13,7 @@
                             <div class="form-group mb-0 me-0"></div>
                             <button class="btn btn-primary" type="button" data-bs-toggle="modal"
                                 data-bs-target="#exampleModalgetbootstrap" data-whatever="@getbootstrap"> <i
-                                    data-feather="plus-square"> </i>Open modal for cuba</button>
+                                    data-feather="plus-square"> </i>New Plot</button>
                             <div class="modal fade" id="exampleModalgetbootstrap" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalgetbootstrap" aria-hidden="true">
                                 @include('pages.backend.plot.create')
