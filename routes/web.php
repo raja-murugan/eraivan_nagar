@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PlotController;
 use App\Http\Controllers\ReferenceController;
 use Illuminate\Support\Facades\Route;
@@ -43,4 +44,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/reference/edit/{unique_key}', [ReferenceController::class, 'edit'])->name('reference.edit');
     // DELETE
     Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/reference/delete/{unique_key}', [ReferenceController::class, 'delete'])->name('reference.delete');
+});
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    // INDEX
+    Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/payment', [PaymentController::class, 'index'])->name('payment.index');
+    // STORE
+    Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/payment/store', [PaymentController::class, 'store'])->name('payment.store');
+    // EDIT
+    Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/payment/edit/{unique_key}', [PaymentController::class, 'edit'])->name('payment.edit');
+    // DELETE
+    Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/payment/delete/{unique_key}', [PaymentController::class, 'delete'])->name('payment.delete');
 });
