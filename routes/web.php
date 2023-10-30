@@ -4,6 +4,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PlotController;
 use App\Http\Controllers\ReferenceController;
+use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,10 +17,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FrontendController::class, 'welcome'])->name('welcome');
+Route::get('/about', [FrontendController::class, 'about'])->name('about');
+Route::get('/benefits', [FrontendController::class, 'benefits'])->name('benefits');
+Route::get('/amenities', [FrontendController::class, 'amenities'])->name('amenities');
+Route::get('/gallery', [FrontendController::class, 'gallery'])->name('gallery');
+Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
 
 Auth::routes();
 
