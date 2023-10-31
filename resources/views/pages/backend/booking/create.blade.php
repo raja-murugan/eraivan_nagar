@@ -5,9 +5,9 @@
         <div class="modal-toggle-wrapper social-profile text-start dark-sign-up">
 
         <div class="card ">
-            <h3 class="modal-header justify-content-center border-0">New Booking</h3>
+            <h4 class="modal-header justify-content-center border-0">New Booking</h4>
             <div class="modal-body border">
-                <form class="row g-3 needs-validation" autocomplete="off" method="POST" action="{{ route('booking.store') }}">
+                <form class="row g-3 needs-validation" autocomplete="off" method="POST" action="{{ route('booking.store') }}" enctype="multipart/form-data">
                     @csrf
 
 
@@ -15,7 +15,7 @@
                         <div class="row">
                            <div class="col-xl-3 col-sm-3">
                               <label class="form-label" for="">Date<span class="txt-danger">*</span></label>
-                              <input class="form-control digits" name="date" id="date" type="date" required="" >
+                              <input class="form-control digits" name="date" id="date" type="date" required="" value="{{$today}}">
                               <div class="valid-feedback">Looks good!</div>
                            </div>
                            <div class="col-xl-3 col-sm-3">
@@ -105,13 +105,14 @@
 
                         <div class="row">
                            <div class="col-xl-3 col-sm-3">
-                              <label class="form-label" for="">ProjectName<span class="txt-danger">*</span></label>
-                              <input class="form-control" id="projectname"  name="projectname" type="text" placeholder="ProjectName" required="">
-                              <div class="valid-feedback">Looks good!</div>
-                           </div>
-                           <div class="col-xl-3 col-sm-3">
                               <label class="form-label" for="">Block<span class="txt-danger">*</span></label>
-                              <input class="form-control" id="block"  name="block" type="text" placeholder="Block" required="">
+                              <select class="form-select" id="booking_block" name="booking_block" required="">
+                              <option selected="" disabled="" value="">Choose...</option>
+                                 <option value="A">A</option>
+                                 <option value="B">B</option>
+                                 <option value="C">C</option>
+                                 <option value="D">D</option>
+                              </select>
                               <div class="valid-feedback">Looks good!</div>
                            </div>
                         </div>
@@ -122,25 +123,22 @@
                                     <tr style="background: #f8f9fa;">
                                         <th style="font-size:15px;">Plot No</th>
                                         <th style="font-size:15px;">Sqft</th>
-                                        <th style="font-size:15px;">Action </th>
                                     </tr>
                                 </thead>
                                 <tbody class="bookingplot_fields">
                                     <tr>
                                        <td>
-                                          <input type="hidden"id="bookingplot_id"name="bookingplot_id[]" />
+                                          <input type="hidden" id="bookingplot_id" name="bookingplot_id[]" />
                                             <select class="form-control js-example-basic-single plot_id select" name="plot_id[]"
-                                                id="plot_id"required>
+                                                id="plot_id1" required>
                                                 <option selected="" disabled="" value="">Choose...</option>
-                                                @foreach ($Plot as $Plots)
-                                                    <option value="{{ $Plots->id }}">{{ $Plots->plot_no }}
-                                                    </option>
-                                                @endforeach
                                             </select>
                                        </td>
-                                       <td><input type="text" class="form-control square_feet" id="square_feet" name="square_feet[]"
-                                                placeholder="Squarefeet" value="" required /></td>
-                                       <td></td>
+                                       <td><input type="text" class="form-control square_feet" id="square_feet1" name="square_feet[]"
+                                                placeholder="Square Feet" value="" readonly />
+                                             <input type="hidden" class="form-control plot_no" id="plot_no1" name="plot_no[]"/></td>
+                                       <td><button style="width: 35px;"class="py-1 text-white font-medium rounded-lg text-sm  text-center btn btn-primary addproductfields"
+                                                type="button" id="" value="Add">+</button></td>
                                     </tr>
                                 </tbody>
                               </table>

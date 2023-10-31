@@ -31,5 +31,6 @@ class Booking extends Model
         'pincode',
         'dateof_site_visit',
         'reference',
+        'block'
     ];
 }

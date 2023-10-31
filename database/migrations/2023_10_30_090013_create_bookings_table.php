@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('pincode')->nullable();
             $table->string('dateof_site_visit')->nullable();
             $table->unsignedBigInteger('reference');
+            $table->string('block')->nullable();
             $table->timestamps();
         });
     }

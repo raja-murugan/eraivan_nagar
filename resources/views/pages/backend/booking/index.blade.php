@@ -19,6 +19,16 @@
                                 aria-labelledby="bookingModalgetbootstrap" aria-hidden="true">
                                 @include('pages.backend.booking.create')
                             </div>
+                            <form autocomplete="off" method="POST" action="{{ route('booking.datefilter') }}">
+                                @method('PUT')
+                                @csrf
+                                <div style="display: flex">
+                                    <div style="margin-right: 10px;"><input type="date" name="from_date"  required
+                                            class="form-control from_date" value="{{ $today }}"></div>
+                                    <div style="margin-right: 10px;"><input type="submit" class="btn btn-success"
+                                            value="Search" /></div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -53,11 +63,11 @@
                                                     <li class="edit">
                                                         <button class="btn btn-success active" type="button" title="btn btn-success active"
                                                             data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModalgetbootstrapedit"
+                                                            data-bs-target="#bookingModalgetbootstrapedit"
                                                             data-whatever="@getbootstrap"> Edit</button>
-                                                        <div class="modal fade" id="exampleModalgetbootstrapedit"
+                                                        <div class="modal fade" id="bookingModalgetbootstrapedit"
                                                             tabindex="-1" role="dialog"
-                                                            aria-labelledby="exampleModalgetbootstrapedit"
+                                                            aria-labelledby="bookingModalgetbootstrapedit"
                                                             aria-hidden="true">
                                                             @include('pages.backend.booking.edit')
                                                         </div>

@@ -61,4 +61,28 @@ class PlotController extends Controller
 
         return redirect()->route('plot.index')->with('warning', 'Deleted !');
     }
+
+
+
+    public function Getplots()
+    {
+        $booking_block = request()->get('booking_block');
+        $GetPlot = Plot::where('block', '=', $booking_block)->where('soft_delete', '!=', 1)->get();
+        $userData['data'] = $GetPlot;
+
+        if (isset($userData) & !empty($userData)) {
+            echo json_encode($userData);
+        }else{
+            echo json_encode(
+                array('status' => 'false')
+            );
+        }
+    }
+    public function Getplotsqarefeet()
+    {
+        $plot_id = request()->get('plot_id');
+        $GetPlot = Plot::findOrFail($plot_id);
+        $userData['data'] = $GetPlot->Sq_ft;
+        echo json_encode($userData);
+    }
 }

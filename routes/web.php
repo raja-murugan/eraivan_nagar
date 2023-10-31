@@ -38,8 +38,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/booking/create', [BookingController::class, 'create'])->name('booking.create');
         // STORE
         Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/booking/store', [BookingController::class, 'store'])->name('booking.store');
-        // EDIT
-        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/booking/edit/{unique_key}', [BookingController::class, 'edit'])->name('booking.edit');
         // UPDATE
         Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/booking/update/{unique_key}', [BookingController::class, 'update'])->name('booking.update');
         // DELETE
@@ -81,3 +79,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/payment/delete/{unique_key}', [PaymentController::class, 'delete'])->name('payment.delete');
     });
 });
+
+
+
+Route::get('/Getplots', [PlotController::class, 'Getplots']);
+Route::get('/Getplotsqarefeet', [PlotController::class, 'Getplotsqarefeet']);

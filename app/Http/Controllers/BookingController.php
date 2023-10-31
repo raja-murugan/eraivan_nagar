@@ -40,6 +40,7 @@ class BookingController extends Controller
                     'rate_per_Sq_ft' => $plot_id->rate_per_Sq_ft,
                     'facing' => $plot_id->facing,
                     'booking_id' => $BookingPlots_arr->booking_id,
+                    'id' => $BookingPlots_arr->id,
                 );
 
             }
@@ -62,9 +63,13 @@ class BookingController extends Controller
                 'street' => $datas->street,
                 'area' => $datas->area,
                 'city' => $datas->city,
+                'pincode' => $datas->pincode,
                 'dateof_site_visit' => $datas->dateof_site_visit,
                 'reference' => $datas->reference,
+                'block' => $datas->block,
                 'referencename' => $reference->name,
+                'id' => $datas->id,
+                'plot_terms' => $plot_terms,
             );
         }
 
@@ -98,6 +103,7 @@ class BookingController extends Controller
                     'rate_per_Sq_ft' => $plot_id->rate_per_Sq_ft,
                     'facing' => $plot_id->facing,
                     'booking_id' => $BookingPlots_arr->booking_id,
+                    'id' => $BookingPlots_arr->id,
                 );
 
             }
@@ -120,9 +126,13 @@ class BookingController extends Controller
                 'street' => $datas->street,
                 'area' => $datas->area,
                 'city' => $datas->city,
+                'pincode' => $datas->pincode,
                 'dateof_site_visit' => $datas->dateof_site_visit,
                 'reference' => $datas->reference,
+                'block' => $datas->block,
                 'referencename' => $reference->name,
+                'id' => $datas->id,
+                'plot_terms' => $plot_terms,
             );
         }
 
@@ -146,17 +156,48 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
+        $randomkey = Str::random(5);
+        $Booking = new Booking();
+        $Booking->unique_key = $randomkey;
+        $Booking->date = $request->get('date');
+        $Booking->customername = $request->get('customername');
+        $Booking->fathername = $request->get('fathername');
+        $Booking->mobileno = $request->get('mobileno');
+        $Booking->idproofone = $request->get('idproofone');
+        $Booking->idproof_no = $request->get('idproof_no');
+        $Booking->address = $request->get('address');
+        $Booking->street = $request->get('street');
+        $Booking->area = $request->get('area');
+        $Booking->city = $request->get('city');
+        $Booking->pincode = $request->get('pincode');
+        $Booking->dateof_site_visit = $request->get('dateof_site_visit');
+        $Booking->reference = $request->get('reference');
+        $Booking->block = $request->get('booking_block');
+        $Booking->save();
 
+
+        $insertedId = $Booking->id;
+
+        foreach ($request->get('plot_id') as $key => $plot_id) {
+
+            $Getplot = Plot::findOrFail($plot_id);
+
+            $BookingPlot = new BookingPlot;
+            $BookingPlot->booking_id = $insertedId;
+            $BookingPlot->projectname = 'ERAIVAN NAGAR';
+            $BookingPlot->block = $request->get('booking_block');
+            $BookingPlot->plot_id = $plot_id;
+            $BookingPlot->plot_no = $Getplot->plot_no;
+            $BookingPlot->square_feet = $request->square_feet[$key];
+            $BookingPlot->save();
+        }
+
+        return redirect()->route('booking.index')->with('message', 'booking Data added successfully!');
     }
 
 
 
-    public function edit($unique_key)
-    {
-
-    }
-
-
+   
 
 
 
