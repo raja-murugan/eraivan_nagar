@@ -25,6 +25,7 @@ class PlotController extends Controller
         $data->unique_key = $randomkey;
         $data->plot_no = $request->get('plot_no');
         $data->Sq_ft = $request->get('Sq_ft');
+        $data->block = $request->get('block');
         $data->rate_per_Sq_ft = $request->get('rate_per_Sq_ft');
         $data->facing = $request->get('facing');
 
@@ -41,6 +42,7 @@ class PlotController extends Controller
 
         $plotData->plot_no = $request->get('plot_no');
         $plotData->Sq_ft = $request->get('Sq_ft');
+        $plotData->block = $request->get('block');
         $plotData->rate_per_Sq_ft = $request->get('rate_per_Sq_ft');
         $plotData->facing = $request->get('facing');
 

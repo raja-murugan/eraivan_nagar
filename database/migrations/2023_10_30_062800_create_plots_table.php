@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('Sq_ft');
             $table->string('rate_per_Sq_ft');
             $table->string('facing');
+            $table->string('block');
             $table->string('status')->default('open');
             $table->boolean('soft_delete')->default(0);
             $table->timestamps();

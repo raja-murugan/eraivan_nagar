@@ -23,6 +23,15 @@
                             placeholder="Enter your Rate Per Sq.ft" required="" value="{{ $plotdata->rate_per_Sq_ft }}">
                     </div>
                     <div class="col-md-12">
+                        <label class="form-label">Block <span style="color: red">*</span></label>
+                        <select class="form-select" id="publishStatus" name="block" required="">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
                         <label class="form-label" style="margin-top: 10px">Facing <span style="color: red">*</span></label>
                         <select class="form-select" id="publishStatus" name="facing" required="">
                             <option>North</option>

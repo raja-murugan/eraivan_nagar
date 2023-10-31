@@ -15,6 +15,7 @@ class Plot extends Model
         'rate_per_Sq_ft',
         'rate_per_Sq_ft',
         'facing',
+        'block',
         'status',
         'soft_delete'
     ];

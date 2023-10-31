@@ -33,7 +33,7 @@
                                             <div class="media-body ms-3">
                                                 <div class="product-name">
                                                     <h6><a href="#">Plot No :
-                                                            {{ $plotdata->plot_no }}<span></span></a></h6>
+                                                        <span>{{ $plotdata->plot_no }}</span> @ Block <span>{{ $plotdata->block }}</span></a></h6>
                                                 </div>
                                                 <div class="price d-flex">
                                                     <div class="text-muted me-2">Sq.ft : {{ $plotdata->Sq_ft }} X

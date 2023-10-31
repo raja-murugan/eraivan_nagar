@@ -1,1 +1,1 @@
-@include('pages.dashboard')
+@include('pages.backend.dashboard')

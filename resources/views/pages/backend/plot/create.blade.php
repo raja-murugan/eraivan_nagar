@@ -21,12 +21,21 @@
                             placeholder="Enter your Rate Per Sq.ft" required="">
                     </div>
                     <div class="col-md-6">
+                        <label class="form-label">Block <span style="color: red">*</span></label>
+                        <select class="form-select" id="publishStatus" name="block" required="">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
                         <label class="form-label">Facing <span style="color: red">*</span></label>
                         <select class="form-select" id="publishStatus" name="facing" required="">
-                            <option>North</option>
-                            <option>South</option>
-                            <option>East</option>
-                            <option>West</option>
+                            <option value="North">North</option>
+                            <option value="South">South</option>
+                            <option value="East">East</option>
+                            <option value="West">West</option>
                         </select>
                     </div>
                     <div class="col-md-12">
