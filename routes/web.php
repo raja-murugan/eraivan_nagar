@@ -38,12 +38,30 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/booking/create', [BookingController::class, 'create'])->name('booking.create');
         // STORE
         Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/booking/store', [BookingController::class, 'store'])->name('booking.store');
+        // EDIT
+        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/booking/edit/{unique_key}', [BookingController::class, 'edit'])->name('booking.edit');
         // UPDATE
         Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/booking/update/{unique_key}', [BookingController::class, 'update'])->name('booking.update');
         // DELETE
         Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/booking/delete/{unique_key}', [BookingController::class, 'delete'])->name('booking.delete');
         // DATAE FILTER
         Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/booking/datefilter', [BookingController::class, 'datefilter'])->name('booking.datefilter');
+        // PAYMENT
+        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/booking/payment/{plotid}/{booking_id}', [BookingController::class, 'payment'])->name('booking.payment');
+        // PAYMENT STORE
+        Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/booking/paymentstore', [BookingController::class, 'paymentstore'])->name('booking.paymentstore');
+        // INDEX
+        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/payment_receipt', [BookingController::class, 'payment_receipt'])->name('booking.payment_receipt');
+        // DATAE FILTER
+        Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/booking/receiptdatefilter', [BookingController::class, 'receiptdatefilter'])->name('booking.receiptdatefilter');
+        // PRINT
+        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/booking/recept_print/{unique_key}', [BookingController::class, 'recept_print'])->name('booking.recept_print');
+        // DELETE
+        Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/booking/receipt_delete/{unique_key}', [BookingController::class, 'receipt_delete'])->name('booking.receipt_delete');
+        // EDIT
+        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/booking/recept_edit/{unique_key}', [BookingController::class, 'recept_edit'])->name('booking.recept_edit');
+        // UPDATE
+        Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/booking/recept_update/{unique_key}', [BookingController::class, 'recept_update'])->name('booking.recept_update');
     });
 
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {

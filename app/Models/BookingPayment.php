@@ -5,20 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BookingPlot extends Model
+class BookingPayment extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
+        'unique_key',
+        'soft_delete',
         'booking_id',
-        'projectname',
-        'block',
         'plot_id',
+        'date',
+        'bill_no',
+        'block',
         'plot_no',
-        'square_feet',
+        'sqft',
         'ratepersqft',
-        'total',
-        'paid_amount',
-        'balance_amount'
+        'totalamount',
+        'payment_method',
+        'terms',
+        'payableamount'
     ];
 }

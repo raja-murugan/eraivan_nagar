@@ -7,6 +7,8 @@ use App\Models\Booking;
 use App\Models\BookingPlot;
 use App\Models\Plot;
 use App\Models\Reference;
+use App\Models\Payment;
+use App\Models\BookingPayment;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -40,6 +42,9 @@ class BookingController extends Controller
                     'rate_per_Sq_ft' => $plot_id->rate_per_Sq_ft,
                     'facing' => $plot_id->facing,
                     'booking_id' => $BookingPlots_arr->booking_id,
+                    'total' => $BookingPlots_arr->total,
+                    'paid_amount' => $BookingPlots_arr->paid_amount,
+                    'balance_amount' => $BookingPlots_arr->balance_amount,
                     'id' => $BookingPlots_arr->id,
                 );
 
@@ -103,6 +108,9 @@ class BookingController extends Controller
                     'rate_per_Sq_ft' => $plot_id->rate_per_Sq_ft,
                     'facing' => $plot_id->facing,
                     'booking_id' => $BookingPlots_arr->booking_id,
+                    'total' => $BookingPlots_arr->total,
+                    'paid_amount' => $BookingPlots_arr->paid_amount,
+                    'balance_amount' => $BookingPlots_arr->balance_amount,
                     'id' => $BookingPlots_arr->id,
                 );
 
@@ -147,7 +155,7 @@ class BookingController extends Controller
     public function create()
     {
         $Reference = Reference::where('soft_delete', '!=', 1)->get();
-        $Plot = Plot::where('soft_delete', '!=', 1)->get();
+        $Plot = Plot::where('status', '=', 'open')->where('soft_delete', '!=', 1)->get();
         $today = Carbon::now()->format('Y-m-d');
 
         return view('pages.backend.booking.create', compact('Reference', 'Plot', 'today'));
@@ -181,6 +189,7 @@ class BookingController extends Controller
         foreach ($request->get('plot_id') as $key => $plot_id) {
 
             $Getplot = Plot::findOrFail($plot_id);
+            $total = $Getplot->Sq_ft * $Getplot->rate_per_Sq_ft;
 
             $BookingPlot = new BookingPlot;
             $BookingPlot->booking_id = $insertedId;
@@ -189,7 +198,16 @@ class BookingController extends Controller
             $BookingPlot->plot_id = $plot_id;
             $BookingPlot->plot_no = $Getplot->plot_no;
             $BookingPlot->square_feet = $request->square_feet[$key];
+            $BookingPlot->ratepersqft = $Getplot->rate_per_Sq_ft;
+            $BookingPlot->total = $total;
+            $BookingPlot->paid_amount = 0;
+            $BookingPlot->balance_amount = $total;
             $BookingPlot->save();
+
+
+            $Updateplot = Plot::findOrFail($plot_id);
+            $Updateplot->status = 'Sold';
+            $Updateplot->save();
         }
 
         return redirect()->route('booking.index')->with('message', 'booking Data added successfully!');
@@ -197,21 +215,332 @@ class BookingController extends Controller
 
 
 
-   
+    public function edit($unique_key)
+    {
+        $BookingData = Booking::where('unique_key', '=', $unique_key)->first();
+        $BookingPlotdata = BookingPlot::where('booking_id', '=', $BookingData->id)->get();
+        $Reference = Reference::where('soft_delete', '!=', 1)->get();
+        $Plot = Plot::where('soft_delete', '!=', 1)->get();
+        $today = Carbon::now()->format('Y-m-d');
+
+        return view('pages.backend.booking.edit', compact('Reference', 'Plot', 'today', 'BookingData', 'BookingPlotdata'));
+    }
 
 
 
     public function update(Request $request, $unique_key)
     {
+        $Booking_Data = Booking::where('unique_key', '=', $unique_key)->first();
+        $Booking_Data->date = $request->get('date');
+        $Booking_Data->customername = $request->get('customername');
+        $Booking_Data->fathername = $request->get('fathername');
+        $Booking_Data->mobileno = $request->get('mobileno');
+        $Booking_Data->idproofone = $request->get('idproofone');
+        $Booking_Data->idproof_no = $request->get('idproof_no');
+        $Booking_Data->address = $request->get('address');
+        $Booking_Data->street = $request->get('street');
+        $Booking_Data->area = $request->get('area');
+        $Booking_Data->city = $request->get('city');
+        $Booking_Data->pincode = $request->get('pincode');
+        $Booking_Data->dateof_site_visit = $request->get('dateof_site_visit');
+        $Booking_Data->reference = $request->get('reference');
+        $Booking_Data->block = $request->get('booking_block');
+        $Booking_Data->update();
+
+
+        $Booking_id = $Booking_Data->id;
+
+
+        $getinsertedP_Products = BookingPlot::where('booking_id', '=', $Booking_id)->get();
+        $Purchaseproducts = array();
+        foreach ($getinsertedP_Products as $key => $getinserted_P_Products) {
+            $Purchaseproducts[] = $getinserted_P_Products->id;
+        }
+
+        $updatedpurchaseproduct_id = $request->bookingplot_id;
+        $updated_PurchaseProduct_id = array_filter($updatedpurchaseproduct_id);
+        $different_ids = array_merge(array_diff($Purchaseproducts, $updated_PurchaseProduct_id), array_diff($updated_PurchaseProduct_id, $Purchaseproducts));
+
+        if (!empty($different_ids)) {
+            foreach ($different_ids as $key => $different_id) {
+                BookingPlot::where('id', $different_id)->delete();
+            }
+        }
+
+
+        foreach ($request->get('bookingplot_id') as $key => $bookingplot_id) {
+            if ($bookingplot_id > 0) {
+
+                $Getplotno = Plot::findOrFail($request->plot_id[$key]);
+
+                $plot_id = $request->plot_id[$key];
+                $square_feet = $request->square_feet[$key];
+                $plot_no = $Getplotno->plot_no;
+
+                DB::table('booking_plots')->where('id', $bookingplot_id)->update([
+                    'booking_id' => $Booking_id,  'block' => $request->get('booking_block'),  'plot_id' => $plot_id,  'plot_no' => $plot_no,  'square_feet' => $square_feet
+                ]);
+
+            } else if ($bookingplot_id == '') {
+
+                if ($request->plot_id[$key] > 0) {
+
+                    $Getplot = Plot::findOrFail($request->plot_id[$key]);
+                    $total = $Getplot->Sq_ft * $Getplot->rate_per_Sq_ft;
+
+                    $BookingPlot = new BookingPlot;
+                    $BookingPlot->booking_id = $Booking_id;
+                    $BookingPlot->projectname = 'ERAIVAN NAGAR';
+                    $BookingPlot->block = $request->get('booking_block');
+                    $BookingPlot->plot_id = $request->plot_id[$key];
+                    $BookingPlot->plot_no = $Getplot->plot_no;
+                    $BookingPlot->square_feet = $request->square_feet[$key];
+                    $BookingPlot->ratepersqft = $Getplot->rate_per_Sq_ft;
+                    $BookingPlot->total = $total;
+                    $BookingPlot->paid_amount = 0;
+                    $BookingPlot->balance_amount = $total;
+                    $BookingPlot->save();
+
+
+                    $Updateplot = Plot::findOrFail($request->plot_id[$key]);
+                    $Updateplot->status = 'Sold';
+                    $Updateplot->save();
+                }
+            }
+        }
+
+        return redirect()->route('booking.index')->with('info', 'booking Data Updated successfully!');
+    }
+
+
+    public function delete($unique_key)
+    {
+        $Booking_Data = Booking::where('unique_key', '=', $unique_key)->first();
+        $Booking_Data->soft_delete = 1;
+        $Booking_Data->update();
+        return redirect()->route('booking.index')->with('warning', 'Deleted !');
+    }
+
+
+    public function payment($plotid, $booking_id)
+    {
+        $getplot = Plot::findOrFail($plotid);
+        $plotno = $getplot->plot_no;
+        $BookingData = Booking::findOrFail($booking_id);
+        $today = Carbon::now()->format('Y-m-d');
+        $Bookingplots = BookingPlot::where('booking_id', '=', $booking_id)->where('plot_id', '=', $plotid)->first();
+        $total = $Bookingplots->square_feet * $getplot->rate_per_Sq_ft;
+        $totalamount = number_format($total);
+        $Payment = Payment::where('soft_delete', '!=', 1)->get();
+        $BookingPayment = BookingPayment::where('booking_id', '=', $booking_id)->where('plot_id', '=', $plotid)->get();
+
+        
+        return view('pages.backend.booking.payment', compact('today', 'plotid', 'booking_id', 'plotno', 'BookingData', 'Bookingplots', 'getplot', 'totalamount', 'Payment', 'total', 'BookingPayment'));
+    }
+
+
+
+    public function paymentstore(Request $request)
+    {
+        $bprandomkey = Str::random(5);
+
+        $s_bill_no = 1;
+        $lastbill = BookingPayment::where('soft_delete', '!=', 1)->latest('id')->first();
+        if($lastbill != '')
+        {
+            $added_billno = substr ($lastbill->bill_no, -2);
+            $new_bill = 'RTC0' . ($added_billno) + 1;
+        }else {
+            $new_bill = 'RTC0' . $s_bill_no;
+        }
+
+        $BookingPayment = new BookingPayment();
+        $BookingPayment->unique_key = $bprandomkey;
+        $BookingPayment->booking_id = $request->get('booking_id');
+        $BookingPayment->plot_id = $request->get('plot_id');
+        $BookingPayment->date = $request->get('date');
+        $BookingPayment->bill_no = $new_bill;
+        $BookingPayment->block = $request->get('block');
+        $BookingPayment->plot_no = $request->get('plotno');
+        $BookingPayment->sqft = $request->get('sqft');
+        $BookingPayment->ratepersqft = $request->get('ratepersqft');
+        $BookingPayment->totalamount = $request->get('totalamount');
+        $BookingPayment->payment_method = $request->get('payment_method');
+        $BookingPayment->terms = $request->get('terms');
+        $BookingPayment->payableamount = $request->get('payableamount');
+        $BookingPayment->save();
+
+
+        $booking_id = $request->get('booking_id');
+        $plot_id = $request->get('plot_id');
+
+        $GetBooking = BookingPlot::where('booking_id', '=', $booking_id)->where('plot_id', '=', $plot_id)->first();
+
+        $newpaid = $GetBooking->paid_amount + $request->get('payableamount');
+        $balance = $GetBooking->total - $newpaid;
+
+        $GetBooking->paid_amount = $newpaid;
+        $GetBooking->balance_amount = $balance;
+        $GetBooking->update();
+
+        return redirect()->route('booking.index')->with('message', 'Payment  added successfully!');
+    }
+
+
+
+    public function payment_receipt()
+    {
+        $today = Carbon::now()->format('Y-m-d');
+        $booking_receipts = [];
+        $BookingPaymentdata = BookingPayment::orderBy('id', 'desc')->where('soft_delete', '!=', 1)->get();
+        foreach ($BookingPaymentdata as $key => $datas) {
+
+            $GetBookingplot = BookingPlot::where('booking_id', '=', $datas->booking_id)->where('plot_id', '=', $datas->plot_id)->first();
+            $BookingData = Booking::findOrFail($datas->booking_id);
+
+            $booking_receipts[] = array(
+                'unique_key' => $datas->unique_key,
+                'booking_id' => $datas->booking_id,
+                'plot_id' => $datas->plot_id,
+                'date' => $datas->date,
+                'bill_no' => $datas->bill_no,
+                'block' => $datas->block,
+                'plot_no' => $datas->plot_no,
+                'sqft' => $datas->sqft,
+                'ratepersqft' => $datas->ratepersqft,
+                'totalamount' => $datas->totalamount,
+                'payment_method' => $datas->payment_method,
+                'terms' => $datas->terms,
+                'payableamount' => number_format($datas->payableamount),
+                'customername' => $BookingData->customername,
+            );
+        }
+
+        return view('pages.backend.booking.payment_receipt', compact('BookingPaymentdata', 'today', 'booking_receipts'));
+    }
+
+
+    public function receiptdatefilter(Request $request) {
+        $today = $request->get('from_date');
+        $booking_receipts = [];
+        $BookingPaymentdata = BookingPayment::orderBy('id', 'desc')->where('soft_delete', '!=', 1)->get();
+        foreach ($BookingPaymentdata as $key => $datas) {
+
+            $GetBookingplot = BookingPlot::where('booking_id', '=', $datas->booking_id)->where('plot_id', '=', $datas->plot_id)->first();
+            $BookingData = Booking::findOrFail($datas->booking_id);
+
+            $booking_receipts[] = array(
+                'unique_key' => $datas->unique_key,
+                'booking_id' => $datas->booking_id,
+                'plot_id' => $datas->plot_id,
+                'date' => $datas->date,
+                'bill_no' => $datas->bill_no,
+                'block' => $datas->block,
+                'plot_no' => $datas->plot_no,
+                'sqft' => $datas->sqft,
+                'ratepersqft' => $datas->ratepersqft,
+                'totalamount' => $datas->totalamount,
+                'payment_method' => $datas->payment_method,
+                'terms' => $datas->terms,
+                'payableamount' => $datas->payableamount,
+                'customername' => $BookingData->customername,
+            );
+        }
+
+        return view('pages.backend.booking.payment_receipt', compact('BookingPaymentdata', 'today', 'booking_receipts'));
+    }
+
+
+
+    public function recept_print($unique_key)
+    {
+        $BookingPaymentdata = BookingPayment::where('unique_key', '=', $unique_key)->first();
+        $today = Carbon::now()->format('Y-m-d');
+
+        return view('pages.backend.booking.recept_print', compact('BookingPaymentdata', 'today'));
+    }
+
+
+
+    public function recept_edit($unique_key)
+    {
+        $BookingPayment = BookingPayment::where('unique_key', '=', $unique_key)->first();
+
+        $getplot = Plot::findOrFail($BookingPayment->plot_id);
+        $plotno = $getplot->plot_no;
+        $BookingData = Booking::findOrFail($BookingPayment->booking_id);
+        $today = Carbon::now()->format('Y-m-d');
+
+        $Bookingplots = BookingPlot::where('booking_id', '=', $BookingPayment->booking_id)->where('plot_id', '=', $BookingPayment->plot_id)->first();
+        $total = $Bookingplots->square_feet * $getplot->rate_per_Sq_ft;
+        $totalamount = number_format($total);
+        $Payment = Payment::where('soft_delete', '!=', 1)->get();
+
+        $plotid = $BookingPayment->plot_id;
+        $booking_id = $BookingPayment->booking_id;
+
+        
+        return view('pages.backend.booking.recept_edit', compact('today', 'plotid', 'booking_id', 'plotno', 'BookingData', 'Bookingplots', 'getplot', 'totalamount', 'Payment', 'total', 'BookingPayment', 'unique_key'));
 
     }
 
 
 
-
-    public function delete($unique_key)
+    public function recept_update(Request $request, $unique_key)
     {
+        $BookingPayment_Data = BookingPayment::where('unique_key', '=', $unique_key)->first();
 
+        $paidamount = $BookingPayment_Data->payableamount;
+        $bookingid = $BookingPayment_Data->booking_id;
+        $plot_id = $BookingPayment_Data->plot_id;
+
+        $GetBookingplot = BookingPlot::where('booking_id', '=', $bookingid)->where('plot_id', '=', $plot_id)->first();
+        
+        $oldpaid = $GetBookingplot->paid_amount;
+        $newpaid = $oldpaid - $paidamount;
+        $updatedpaid = $newpaid + $request->get('payableamount');
+        $newbalance = $GetBookingplot->total - $updatedpaid;
+
+        $GetBookingplot->paid_amount = $updatedpaid;
+        $GetBookingplot->balance_amount = $newbalance;
+        $GetBookingplot->update();
+
+
+
+        $BookingPayment_Data->date = $request->get('date');
+        $BookingPayment_Data->payment_method = $request->get('payment_method');
+        $BookingPayment_Data->payableamount = $request->get('payableamount');
+        $BookingPayment_Data->update();
+
+        return redirect()->route('booking.index')->with('info', 'Updated !');
+    }
+
+
+
+   
+
+    public function receipt_delete($unique_key)
+    {
+        $BookingPayment = BookingPayment::where('unique_key', '=', $unique_key)->first();
+
+        $paidamount = $BookingPayment->payableamount;
+        $bookingid = $BookingPayment->booking_id;
+        $plot_id = $BookingPayment->plot_id;
+
+        $GetBookingplot = BookingPlot::where('booking_id', '=', $bookingid)->where('plot_id', '=', $plot_id)->first();
+        
+        $oldpaid = $GetBookingplot->paid_amount;
+        $newpaid = $oldpaid - $paidamount;
+        $newbalance = $GetBookingplot->total - $newpaid;
+
+        $GetBookingplot->paid_amount = $newpaid;
+        $GetBookingplot->balance_amount = $newbalance;
+        $GetBookingplot->update();
+
+        
+        $BookingPayment->soft_delete = 1;
+        $BookingPayment->update();
+        return redirect()->route('booking.index')->with('warning', 'Deleted !');
     }
 
 

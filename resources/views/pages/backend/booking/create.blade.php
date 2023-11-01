@@ -1,18 +1,34 @@
-<div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content">
+@extends('layout.backend.auth')
+
+@section('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 project-list" style="margin-top: 30px;">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>New Booking</h4>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group mb-0 me-0"></div>
+                            <a class="btn btn-primary" href="{{ route('booking.index') }}">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
 
 
-        <div class="modal-toggle-wrapper social-profile text-start dark-sign-up">
-
-        <div class="card ">
-            <h4 class="modal-header justify-content-center border-0">New Booking</h4>
-            <div class="modal-body border">
-                <form class="row g-3 needs-validation" autocomplete="off" method="POST" action="{{ route('booking.store') }}" enctype="multipart/form-data">
+   
+                    <form class="row g-3 needs-validation" autocomplete="off" method="POST" action="{{ route('booking.store') }}" enctype="multipart/form-data">
                     @csrf
 
 
                     <h6>Personal Details</h6>
-                        <div class="row">
+                        <div class="row" style="margin-top:25px;">
                            <div class="col-xl-3 col-sm-3">
                               <label class="form-label" for="">Date<span class="txt-danger">*</span></label>
                               <input class="form-control digits" name="date" id="date" type="date" required="" value="{{$today}}">
@@ -34,12 +50,7 @@
                               <div class="valid-feedback">Looks good!</div>
                            </div>
                         </div>
-                        <div class="row">
-                           <div class="col-xl-3 col-sm-3">
-                              <label class="form-label" for="">ID Proof<span class="txt-danger">*</span></label>
-                              <input class="form-control" id="idproof_no"  name="idproof_no" type="text" placeholder="ID Proof" required="">
-                              <div class="valid-feedback">Looks good!</div>
-                           </div>
+                        <div class="row" style="margin-top:25px;">
                            <div class="col-xl-3 col-sm-3">
                               <label class="form-label" for="">Proof<span class="txt-danger">*</span></label>
                               <select class="form-select" id="validationTooltip04" required="" name="idproofone">
@@ -51,11 +62,16 @@
                                  <option value="Ration Card">Ration Card</option>
                             </select>
                            </div>
+                           <div class="col-xl-3 col-sm-3">
+                              <label class="form-label" for="">ID Proof<span class="txt-danger">*</span></label>
+                              <input class="form-control" id="idproof_no"  name="idproof_no" type="text" placeholder="ID Proof" required="">
+                              <div class="valid-feedback">Looks good!</div>
+                           </div>
                         </div>
 <br/>
-                     <h6>Address Details</h6>
+                     <h6 style="margin-top:25px;">Address Details</h6>
 
-                        <div class="row">
+                        <div class="row" style="margin-top:25px;">
                            <div class="col-xl-3 col-sm-3">
                               <label class="form-label" for="">Address<span class="txt-danger">*</span></label>
                               <input class="form-control" id="address"  name="address" type="text" placeholder="Address" required="">
@@ -77,7 +93,7 @@
                               <div class="valid-feedback">Looks good!</div>
                            </div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-top:25px;">
                            <div class="col-xl-3 col-sm-3">
                               <label class="form-label" for="">Pincode<span class="txt-danger">*</span></label>
                               <input class="form-control" id="pincode"  name="pincode" type="number" placeholder="Pincode" required="">
@@ -101,9 +117,9 @@
 
 
                         <br/>
-                     <h6>Plot Details</h6>
+                     <h6 style="margin-top:30px;">Plot Details</h6>
 
-                        <div class="row">
+                        <div class="row" style="margin-top:25px;">
                            <div class="col-xl-3 col-sm-3">
                               <label class="form-label" for="">Block<span class="txt-danger">*</span></label>
                               <select class="form-select" id="booking_block" name="booking_block" required="">
@@ -116,7 +132,7 @@
                               <div class="valid-feedback">Looks good!</div>
                            </div>
                         </div>
-                        <div class="row">
+                        <div class="row" style="margin-top:25px;">
                            <div class="table-responsive col-lg-10 col-sm-12 col-12">
                               <table class="table">
                                  <thead>
@@ -137,8 +153,8 @@
                                        <td><input type="text" class="form-control square_feet" id="square_feet1" name="square_feet[]"
                                                 placeholder="Square Feet" value="" readonly />
                                              <input type="hidden" class="form-control plot_no" id="plot_no1" name="plot_no[]"/></td>
-                                       <td><button style="width: 35px;"class="py-1 text-white font-medium rounded-lg text-sm  text-center btn btn-primary addproductfields"
-                                                type="button" id="" value="Add">+</button></td>
+                                       <td><button style="width: 20px;background-color:#47993f;"class="py-1 text-white font-medium rounded-lg text-sm  text-center btn addproductfields"
+                                                type="button" id="" value="Add" >+</button></td>
                                     </tr>
                                 </tbody>
                               </table>
@@ -152,13 +168,12 @@
                         <button class="btn btn-primary" type="submit">Add</button>
                     </div>
                 </form>
+
+
+
+                    </div>
+                </div>
             </div>
-         </div>
-
-
         </div>
-
-
-        
     </div>
-</div>
+@endsection

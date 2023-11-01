@@ -115,7 +115,7 @@
                     '<tr>' +
                     '<td><input type="hidden"id="bookingplot_id"name="bookingplot_id[]" /><select class="form-control js-example-basic-single plot_id select" name="plot_id[]" id="plot_id' + i + '" required><option selected="" disabled="" value="">Choose...</option></select></td>' +
                     '<td><input type="text" class="form-control square_feet" id="square_feet' + i + '" name="square_feet[]" readonly placeholder="Square Feet" value="" required /><input type="hidden" class="form-control plot_no" id="plot_no' + i + '" name="plot_no[]"/></td>' +
-                    '<td><button style="width: 35px;"class="py-1 text-white remove-extratr font-medium rounded-lg text-sm  text-center btn btn-danger" type="button" id="" value="Add">-</button></td>' +
+                    '<td><button style="width: 35px;background: #9c2b24;"class="py-1 text-white remove-extratr font-medium rounded-lg text-sm  text-center btn" type="button" id="" value="Add">-</button></td>' +
                     '</tr>'
                 );
                 var booking_block = $("#booking_block").val();
@@ -176,4 +176,26 @@
             $(this).parents('tr').remove();
         });
    });
+
+
+
+
+   $(document).on("keyup", 'input.payableamount', function() {
+        var payableamount = $(this).val();
+        var bookingtotal_balance = $(".bookingtotal_balance").val();
+        //alert(bill_paid_amount);
+        var balance_amount = Number(bookingtotal_balance) - Number(payableamount);
+        $('.paymentbalance').val(balance_amount.toFixed(2));
+    });
+
+
+    $(document).on("keyup", 'input.payableamount', function() {
+            var payableamount = $(this).val();
+            var bookingtotal_balance = $(".bookingtotal_balance").val();
+
+            if (Number(payableamount) > Number(bookingtotal_balance)) {
+                alert('!Paid Amount is More than of Total!');
+                $(".paidamount").val('');
+            }
+    });
     </script>

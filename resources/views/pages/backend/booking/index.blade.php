@@ -12,13 +12,7 @@
                         
                         <div class="col-md-6">
                             <div class="form-group mb-0 me-0"></div>
-                            <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                                data-bs-target="#bookingModalgetbootstrap" data-whatever="@getbootstrap"> <i
-                                    data-feather="plus-square"> </i>New Booking</button>
-                            <div class="modal fade" id="bookingModalgetbootstrap" tabindex="-1" role="dialog"
-                                aria-labelledby="bookingModalgetbootstrap" aria-hidden="true">
-                                @include('pages.backend.booking.create')
-                            </div>
+                            <a class="btn btn-primary" href="{{ route('booking.create') }}">New Booking</a>
                             <form autocomplete="off" method="POST" action="{{ route('booking.datefilter') }}">
                                 @method('PUT')
                                 @csrf
@@ -44,7 +38,6 @@
                                         <th>Date</th>
                                         <th>Plot No</th>
                                         <th>Customer</th>
-                                        <th>Father / Husband</th>
                                         <th>Mobile</th>
                                         <th>Action</th>
                                     </tr>
@@ -53,28 +46,35 @@
                                     @foreach ($bookings as $keydata => $bookingsdata)
                                         <tr>
                                             <td>{{ ++$keydata }}</td>
-                                            <td>{{ $bookingsdata['date']   }}</td>
-                                            <td></td>
+                                            <td>{{ date('d-m-Y', strtotime($bookingsdata['date']))   }}</td>
+                                            <td>@foreach ($bookingsdata['plot_terms'] as $index => $terms_array)
+                                                    @if ($terms_array['booking_id'] == $bookingsdata['id'])
+                                                   <span style="margin-bottom: 10px;"> PlotNo :{{ $terms_array['plot_no'] }} - SqFt : {{ $terms_array['Sq_ft'] }}, 
+                                                        @if ($terms_array['balance_amount'] != '0')
+                                                        <a href="{{ route('booking.payment', ['plotid' => $terms_array['plot_id'], 'booking_id' => $bookingsdata['id']]) }}"
+                                                            class=" btn-sm" style="color: white;background-color:#5c2734;padding:7px;">Payment</a>
+                                                        @endif
+                                                        
+                                                    </span><br/>
+                                                    @endif
+                                                    @endforeach</td>
                                             <td>{{ $bookingsdata['customername']   }}</td>
-                                            <td>{{ $bookingsdata['fathername']   }}{{ $bookingsdata['husbandname']   }}</td>
                                             <td>{{ $bookingsdata['mobileno']   }}</td>
                                             <td>
                                                 <ul class="action">
                                                     <li class="edit">
-                                                        <button class="btn btn-success active" type="button" title="btn btn-success active"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#bookingModalgetbootstrapedit"
-                                                            data-whatever="@getbootstrap"> Edit</button>
-                                                        <div class="modal fade" id="bookingModalgetbootstrapedit"
-                                                            tabindex="-1" role="dialog"
-                                                            aria-labelledby="bookingModalgetbootstrapedit"
-                                                            aria-hidden="true">
-                                                            @include('pages.backend.booking.edit')
-                                                        </div>
+                                                    <a href="{{ route('booking.edit', ['unique_key' => $bookingsdata['unique_key']]) }}"
+                                                            class="btn" style="color: white;background-color:#98b420;">Edit</a>
                                                     </li>
                                                     <li class="delete">
-                                                        <button class="btn btn-danger active" type="button"
-                                                            title="btn btn-danger active">Delete</button>
+                                                        <button class="btn " type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#bookingModalgetbootstrapdelete{{$bookingsdata['unique_key']}}"
+                                                            data-whatever="@getbootstrap" style="background-color:#d32626;"> Delete</button>
+                                                        <div class="modal fade" id="bookingModalgetbootstrapdelete{{$bookingsdata['unique_key']}}" tabindex="-1"
+                                                            role="dialog" aria-labelledby="bookingModalgetbootstrapdelete{{$bookingsdata['unique_key']}}"
+                                                            aria-hidden="true">
+                                                            @include('pages.backend.booking.delete')
+                                                        </div>
                                                     </li>
                                                 </ul>
                                             </td>

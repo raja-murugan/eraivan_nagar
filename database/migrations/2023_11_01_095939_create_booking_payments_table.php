@@ -13,24 +13,29 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('booking_plots', function (Blueprint $table) {
+        Schema::create('booking_payments', function (Blueprint $table) {
             $table->id();
+            $table->string('unique_key')->unique();
+            $table->boolean('soft_delete')->default(0);
 
             $table->unsignedBigInteger('booking_id');
             $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
-            
-            $table->string('projectname')->nullable();
-            $table->string('block')->nullable();
 
             $table->unsignedBigInteger('plot_id');
             $table->foreign('plot_id')->references('id')->on('plots')->onDelete('cascade');
-            
+
+            $table->string('date')->nullable();
+            $table->string('bill_no')->nullable();
+            $table->string('block')->nullable();
             $table->string('plot_no')->nullable();
-            $table->string('square_feet')->nullable();
+            $table->string('sqft')->nullable();
             $table->string('ratepersqft')->nullable();
-            $table->string('total')->nullable();
-            $table->string('paid_amount')->nullable();
-            $table->string('balance_amount')->nullable();
+            $table->string('totalamount')->nullable();
+
+            $table->string('payment_method')->nullable();
+            $table->string('terms')->nullable();
+            $table->string('payableamount')->nullable();
+
             $table->timestamps();
         });
     }
@@ -42,6 +47,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('booking_plots');
+        Schema::dropIfExists('booking_payments');
     }
 };

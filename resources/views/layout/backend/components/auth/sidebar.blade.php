@@ -38,17 +38,19 @@
                       <h6 class="lan-8">Applications</h6>
                     </div>
                   </li>
-                    <li class="sidebar-list"><i class="fa fa-thumb-tack">    </i>
+                    <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="#">
-                        <svg class="stroke-icon">
-                            <use href="{{ asset('assets/backend/svg/icon-sprite.svg#stroke-calendar') }}"></use>
-                        </svg>
-                        <svg class="fill-icon">
-                            <use href="{{ asset('assets/backend/svg/icon-sprite.svg#stroke-calendar') }}"></use>
-                        </svg><span>Plot Booking           </span></a>
-                        <ul class="sidebar-submenu">
-                        <li><a href="{{ route('booking.index') }}">Booking</a></li>
-                        </ul>
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('assets/backend/svg/icon-sprite.svg#stroke-calendar') }}"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('assets/backend/svg/icon-sprite.svg#stroke-calendar') }}"></use>
+                            </svg><span>Plot Booking           </span></a>
+                            <ul class="sidebar-submenu">
+                                <li><a href="{{ route('booking.index') }}">Booking</a></li>
+                                <li><a href="{{ route('booking.payment_receipt') }}">Receipt</a></li>
+                            </ul>
+                        </a>
                   </li>
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="{{ route('plot.index') }}" class="{{ Route::is('plot.index') ? 'active' : '' }}">
