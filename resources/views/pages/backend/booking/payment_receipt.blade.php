@@ -58,8 +58,14 @@
                                                    <td>
                                                             <ul class="action">
                                                                <li class="edit">
+                                                               @if ($booking_receipt['payment_method'] == 'Cash')
+                                                               <a href="{{ route('booking.receptcash_print', ['unique_key' => $booking_receipt['unique_key']]) }}"
+                                                                        class="btn" style="color: white;background-color:#043c11;">Print</a>
+                                                               @else
                                                                <a href="{{ route('booking.recept_print', ['unique_key' => $booking_receipt['unique_key']]) }}"
                                                                         class="btn" style="color: white;background-color:#043c11;">Print</a>
+                                                               @endif
+                                                               
                                                                </li>
                                                                <li class="edit">
                                                                   <a href="{{ route('booking.recept_edit', ['unique_key' => $booking_receipt['unique_key']]) }}"

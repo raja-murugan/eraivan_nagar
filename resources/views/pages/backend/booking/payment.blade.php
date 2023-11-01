@@ -74,7 +74,7 @@
                                 </thead>
                                 <tbody class="bookingplot_fields">
                                     <tr>
-                                       <td><input class="form-control digits" name="block" id="block" type="text" readonly value="{{$BookingData->block}}"></td>
+                                       <td><input class="form-control digits" name="block" id="block" type="text" readonly value="{{$Bookingplots->block}}"></td>
                                        <td><input class="form-control digits" name="plotno" id="plotno" type="text" readonly value="{{$plotno}}">
                                        </td>
                                        <td><input type="text" class="form-control sqft" id="sqft" name="sqft"
@@ -144,7 +144,7 @@
                                                 placeholder="Payable Amount" required="" /></td>
                                                 
                                        <td><input type="text" class="form-control paymentbalance" id="balance" name="balance"
-                                                placeholder="Payable Amount" value=""/></td>
+                                                placeholder="" readonly value=""/></td>
                                     </tr>
                                     
                                 </tbody>

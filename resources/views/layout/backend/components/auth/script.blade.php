@@ -47,9 +47,9 @@
         var i = 1;
    var j = 1;
    $(document).ready(function() {
-        $('#booking_block').on('change', function() {
-         var booking_block = this.value;
-         $('.square_feet').val('');
+        $('#booking_block' + 1).on('change', function() {
+            var booking_block = this.value;
+            $('#square_feet' + 1).val('');
                 $.ajax({
                     url: '/Getplots/',
                     type: 'get',
@@ -62,29 +62,27 @@
                         //
                         console.log(response);
                         if (response.status !== 'false') {
-                            $('.plot_id').empty();
-                            var $select = $(".plot_id").append(
+                            $('#plot_id' + 1).empty();
+                            var $select = $('#plot_id' + 1).append(
                                 $('<option>', {
                                     value: '0',
                                     text: 'Choose..'
                                 }));
-                            $(".plot_id").append($select);
+                            $('#plot_id' + 1).append($select);
 
                             var len = response['data'].length;
                             if (len > 0) {
                                 for (var i = 0; i < len; i++) {
 
-                                    $(".plot_id").append($('<option>', {
+                                    $('#plot_id' + 1).append($('<option>', {
                                         value: response['data'][i].id,
                                         text: response['data'][i].plot_no
                                     }));
                                 }
                             }
                         } else {
-                            $('.plot_id').empty();
+                            $('#plot_id' + 1).empty();
                         }
-                        
-                        
                     }
                 });
         });
@@ -109,17 +107,11 @@
                 });
 
 
-      $(document).on('click', '.addproductfields', function() {
-         ++i;
-            $(".bookingplot_fields").append(
-                    '<tr>' +
-                    '<td><input type="hidden"id="bookingplot_id"name="bookingplot_id[]" /><select class="form-control js-example-basic-single plot_id select" name="plot_id[]" id="plot_id' + i + '" required><option selected="" disabled="" value="">Choose...</option></select></td>' +
-                    '<td><input type="text" class="form-control square_feet" id="square_feet' + i + '" name="square_feet[]" readonly placeholder="Square Feet" value="" required /><input type="hidden" class="form-control plot_no" id="plot_no' + i + '" name="plot_no[]"/></td>' +
-                    '<td><button style="width: 35px;background: #9c2b24;"class="py-1 text-white remove-extratr font-medium rounded-lg text-sm  text-center btn" type="button" id="" value="Add">-</button></td>' +
-                    '</tr>'
-                );
-                var booking_block = $("#booking_block").val();
 
+
+        $('#booking_block' + 2).on('change', function() {
+            var booking_block = this.value;
+            $('#square_feet' + 2).val('');
                 $.ajax({
                     url: '/Getplots/',
                     type: 'get',
@@ -131,28 +123,34 @@
                     success: function(response) {
                         //
                         console.log(response);
-                        var len = response['data'].length;
+                        if (response.status !== 'false') {
+                            $('#plot_id' + 2).empty();
+                            var $select = $('#plot_id' + 2).append(
+                                $('<option>', {
+                                    value: '0',
+                                    text: 'Choose..'
+                                }));
+                            $('#plot_id' + 2).append($select);
 
-                        var selectedValues = new Array();
+                            var len = response['data'].length;
+                            if (len > 0) {
+                                for (var i = 0; i < len; i++) {
 
-                        if (len > 0) {
-                            for (var i = 0; i < len; i++) {
-
-                                    var id = response['data'][i].id;
-                                    var plot_no = response['data'][i].plot_no;
-                                    var option = "<option value='" + id + "'>" + plot_no +
-                                        "</option>";
-                                    selectedValues.push(option);
+                                    $('#plot_id' + 2).append($('<option>', {
+                                        value: response['data'][i].id,
+                                        text: response['data'][i].plot_no
+                                    }));
+                                }
                             }
+                        } else {
+                            $('#plot_id' + 2).empty();
                         }
-                        ++j;
-                        $('#plot_id' + j).append(selectedValues);
                     }
                 });
+        });
 
 
-
-                $('#plot_id' + i).on('change', function() {
+                $('#plot_id' + 2).on('change', function() {
                     var plot_id = this.value;
                     console.log(plot_id);
                     $.ajax({
@@ -165,13 +163,145 @@
                         dataType: 'json',
                         success: function(response) {
                             console.log(response);
-                            $("#square_feet" + j).val(response['data']);
+                            $("#square_feet" + 2).val(response['data']);
                         }
                     });
                 });
 
 
+
+
+
+
+        $('#booking_block' + 3).on('change', function() {
+            var booking_block = this.value;
+            $('#square_feet' + 3).val('');
+                $.ajax({
+                    url: '/Getplots/',
+                    type: 'get',
+                    data: {
+                            _token: "{{ csrf_token() }}",
+                            booking_block: booking_block
+                        },
+                    dataType: 'json',
+                    success: function(response) {
+                        //
+                        console.log(response);
+                        if (response.status !== 'false') {
+                            $('#plot_id' + 3).empty();
+                            var $select = $('#plot_id' + 3).append(
+                                $('<option>', {
+                                    value: '0',
+                                    text: 'Choose..'
+                                }));
+                            $('#plot_id' + 3).append($select);
+
+                            var len = response['data'].length;
+                            if (len > 0) {
+                                for (var i = 0; i < len; i++) {
+
+                                    $('#plot_id' + 3).append($('<option>', {
+                                        value: response['data'][i].id,
+                                        text: response['data'][i].plot_no
+                                    }));
+                                }
+                            }
+                        } else {
+                            $('#plot_id' + 3).empty();
+                        }
+                    }
+                });
         });
+
+
+                $('#plot_id' + 3).on('change', function() {
+                    var plot_id = this.value;
+                    console.log(plot_id);
+                    $.ajax({
+                        url: '/Getplotsqarefeet/',
+                        type: 'get',
+                        data: {
+                                _token: "{{ csrf_token() }}",
+                                plot_id: plot_id
+                            },
+                        dataType: 'json',
+                        success: function(response) {
+                            console.log(response);
+                            $("#square_feet" + 3).val(response['data']);
+                        }
+                    });
+                });
+
+
+      
+
+       
+        $('#booking_block' + 4).on('change', function() {
+            var booking_block = this.value;
+            $('#square_feet' + 4).val('');
+                $.ajax({
+                    url: '/Getplots/',
+                    type: 'get',
+                    data: {
+                            _token: "{{ csrf_token() }}",
+                            booking_block: booking_block
+                        },
+                    dataType: 'json',
+                    success: function(response) {
+                        //
+                        console.log(response);
+                        if (response.status !== 'false') {
+                            $('#plot_id' + 4).empty();
+                            var $select = $('#plot_id' + 4).append(
+                                $('<option>', {
+                                    value: '0',
+                                    text: 'Choose..'
+                                }));
+                            $('#plot_id' + 4).append($select);
+
+                            var len = response['data'].length;
+                            if (len > 0) {
+                                for (var i = 0; i < len; i++) {
+
+                                    $('#plot_id' + 4).append($('<option>', {
+                                        value: response['data'][i].id,
+                                        text: response['data'][i].plot_no
+                                    }));
+                                }
+                            }
+                        } else {
+                            $('#plot_id' + 4).empty();
+                        }
+                    }
+                });
+        });
+
+
+                $('#plot_id' + 4).on('change', function() {
+                    var plot_id = this.value;
+                    console.log(plot_id);
+                    $.ajax({
+                        url: '/Getplotsqarefeet/',
+                        type: 'get',
+                        data: {
+                                _token: "{{ csrf_token() }}",
+                                plot_id: plot_id
+                            },
+                        dataType: 'json',
+                        success: function(response) {
+                            console.log(response);
+                            $("#square_feet" + 4).val(response['data']);
+                        }
+                    });
+                });
+
+
+
+      
+
+       
+
+
         $(document).on('click', '.remove-extratr', function() {
             $(this).parents('tr').remove();
         });

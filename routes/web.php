@@ -56,6 +56,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/booking/receiptdatefilter', [BookingController::class, 'receiptdatefilter'])->name('booking.receiptdatefilter');
         // PRINT
         Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/booking/recept_print/{unique_key}', [BookingController::class, 'recept_print'])->name('booking.recept_print');
+        // PRINT
+        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/booking/receptcash_print/{unique_key}', [BookingController::class, 'receptcash_print'])->name('booking.receptcash_print');
         // DELETE
         Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/booking/receipt_delete/{unique_key}', [BookingController::class, 'receipt_delete'])->name('booking.receipt_delete');
         // EDIT

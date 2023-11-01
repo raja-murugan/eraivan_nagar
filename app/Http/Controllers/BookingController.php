@@ -180,7 +180,6 @@ class BookingController extends Controller
         $Booking->pincode = $request->get('pincode');
         $Booking->dateof_site_visit = $request->get('dateof_site_visit');
         $Booking->reference = $request->get('reference');
-        $Booking->block = $request->get('booking_block');
         $Booking->save();
 
 
@@ -194,7 +193,7 @@ class BookingController extends Controller
             $BookingPlot = new BookingPlot;
             $BookingPlot->booking_id = $insertedId;
             $BookingPlot->projectname = 'ERAIVAN NAGAR';
-            $BookingPlot->block = $request->get('booking_block');
+            $BookingPlot->block = $request->booking_block[$key];
             $BookingPlot->plot_id = $plot_id;
             $BookingPlot->plot_no = $Getplot->plot_no;
             $BookingPlot->square_feet = $request->square_feet[$key];
@@ -244,7 +243,6 @@ class BookingController extends Controller
         $Booking_Data->pincode = $request->get('pincode');
         $Booking_Data->dateof_site_visit = $request->get('dateof_site_visit');
         $Booking_Data->reference = $request->get('reference');
-        $Booking_Data->block = $request->get('booking_block');
         $Booking_Data->update();
 
 
@@ -278,7 +276,7 @@ class BookingController extends Controller
                 $plot_no = $Getplotno->plot_no;
 
                 DB::table('booking_plots')->where('id', $bookingplot_id)->update([
-                    'booking_id' => $Booking_id,  'block' => $request->get('booking_block'),  'plot_id' => $plot_id,  'plot_no' => $plot_no,  'square_feet' => $square_feet
+                    'booking_id' => $Booking_id,  'block' => $request->booking_block[$key],  'plot_id' => $plot_id,  'plot_no' => $plot_no,  'square_feet' => $square_feet
                 ]);
 
             } else if ($bookingplot_id == '') {
@@ -291,7 +289,7 @@ class BookingController extends Controller
                     $BookingPlot = new BookingPlot;
                     $BookingPlot->booking_id = $Booking_id;
                     $BookingPlot->projectname = 'ERAIVAN NAGAR';
-                    $BookingPlot->block = $request->get('booking_block');
+                    $BookingPlot->block = $request->booking_block[$key];
                     $BookingPlot->plot_id = $request->plot_id[$key];
                     $BookingPlot->plot_no = $Getplot->plot_no;
                     $BookingPlot->square_feet = $request->square_feet[$key];
@@ -458,6 +456,15 @@ class BookingController extends Controller
         $today = Carbon::now()->format('Y-m-d');
 
         return view('pages.backend.booking.recept_print', compact('BookingPaymentdata', 'today'));
+    }
+
+
+    public function receptcash_print($unique_key)
+    {
+        $BookingPaymentdata = BookingPayment::where('unique_key', '=', $unique_key)->first();
+        $today = Carbon::now()->format('Y-m-d');
+
+        return view('pages.backend.booking.receptcash_print', compact('BookingPaymentdata', 'today'));
     }
 
 

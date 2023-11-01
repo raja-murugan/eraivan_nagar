@@ -120,26 +120,7 @@
                         <br/>
                      <h6 style="margin-top:60px;">Plot Details</h6>
 
-                        <div class="row" style="margin-top:25px;">
-
-                           <div class="col-xl-3 col-sm-3">
-                              <label class="form-label" for="">Block<span class="txt-danger">*</span></label>
-                              <select class="form-select" id="booking_block" name="booking_block" required="">
-                              <option selected="" disabled="" value="">Choose...</option>
-                                 <option value="A"@if ('A' === $BookingData->block) selected='selected' @endif>A</option>
-                                 <option value="B"@if ('B' === $BookingData->block) selected='selected' @endif>B</option>
-                                 <option value="C"@if ('C' === $BookingData->block) selected='selected' @endif>C</option>
-                                 <option value="D"@if ('D' === $BookingData->block) selected='selected' @endif>D</option>
-                              </select>
-                              <div class="valid-feedback">Looks good!</div>
-                           </div>
-
-                           <div class="col-xl-1 col-sm-1">
-                              <label class="form-label" for=""><span class="txt-danger">*</span></label>
-                              <button class=" text-white font-medium rounded-lg text-sm  text-center btn  addproductfields"
-                                    type="button" id="" value="Add" style="background-color:#47993f;">+</button>
-                           </div>
-                        </div>
+                      
                         
                         <div class="row" style="margin-top:25px;">
                         
@@ -155,9 +136,18 @@
                                 @foreach ($BookingPlotdata as $index => $BookingPlotdatas)
                                     <tr>
                                        <td>
+                                          <select class="form-select booking_block" id="booking_block{{$index + 1}}" name="booking_block[]" required="">
+                                             <option selected="" disabled="" value="">Choose...</option>
+                                                <option value="A"@if ('A' === $BookingPlotdatas->block) selected='selected' @endif>A</option>
+                                                <option value="B"@if ('B' === $BookingPlotdatas->block) selected='selected' @endif>B</option>
+                                                <option value="C"@if ('C' === $BookingPlotdatas->block) selected='selected' @endif>C</option>
+                                                <option value="D"@if ('D' === $BookingPlotdatas->block) selected='selected' @endif>D</option>
+                                             </select>
+                                       </td>
+                                       <td>
                                           <input type="hidden" id="bookingplot_id" name="bookingplot_id[]" value="{{$BookingPlotdatas->id}}"/>
                                             <select class="form-control js-example-basic-single plot_id select" name="plot_id[]"
-                                                id="plot_id1" required>
+                                                id="plot_id{{$index + 1}}" required>
                                                 <option selected="" disabled="" value="">Choose...</option>
                                                 @foreach ($Plot as $Plotss)
                                                     <option value="{{ $Plotss->id }}"@if ($Plotss->id == $BookingPlotdatas->plot_id) selected='selected' @endif>{{ $Plotss->plot_no }}
@@ -165,9 +155,9 @@
                                                 @endforeach
                                             </select>
                                        </td>
-                                       <td><input type="text" class="form-control square_feet"  value="{{$BookingPlotdatas->square_feet}}" id="square_feet1" name="square_feet[]"
+                                       <td><input type="text" class="form-control square_feet"  value="{{$BookingPlotdatas->square_feet}}" id="square_feet{{$index + 1}}" name="square_feet[]"
                                                 placeholder="Square Feet" value="" readonly />
-                                             <input type="hidden" class="form-control plot_no" id="plot_no1" name="plot_no[]"/></td>
+                                             <input type="hidden" class="form-control plot_no" id="plot_no{{$index + 1}}" name="plot_no[]"/></td>
                                        <td><button style="width: 35px;background: #9c2b24;"class="py-1 text-white remove-extratr font-medium rounded-lg text-sm  text-center btn" type="button" id="" value="Add">-</button></td>
                                     </tr>
                                     @endforeach
