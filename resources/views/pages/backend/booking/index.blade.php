@@ -9,7 +9,7 @@
                         <div class="col-md-6">
                             <h4>Booking</h4>
                         </div>
-                        
+
                         <div class="col-md-6">
                             <div class="form-group mb-0 me-0"></div>
                             <a class="btn btn-primary" href="{{ route('booking.create') }}">New Booking</a>
@@ -49,12 +49,12 @@
                                             <td>{{ date('d-m-Y', strtotime($bookingsdata['date']))   }}</td>
                                             <td>@foreach ($bookingsdata['plot_terms'] as $index => $terms_array)
                                                     @if ($terms_array['booking_id'] == $bookingsdata['id'])
-                                                   <span style="margin-bottom: 10px;"> PlotNo :{{ $terms_array['plot_no'] }} - SqFt : {{ $terms_array['Sq_ft'] }}, 
+                                                   <span style="margin-bottom: 10px;"> Plot No :{{ $terms_array['plot_no'] }} - Sq.Ft : {{ $terms_array['Sq_ft'] }},
                                                         @if ($terms_array['balance_amount'] != '0')
                                                         <a href="{{ route('booking.payment', ['plotid' => $terms_array['plot_id'], 'booking_id' => $bookingsdata['id']]) }}"
-                                                            class=" btn-sm" style="color: white;background-color:#5c2734;padding:7px;">Payment</a>
+                                                            class=" btn-sm" style="color: white;background-color:#5c2734; padding:7px; margin-left: 10px; border-radius:5px;">Payment</a>
                                                         @endif
-                                                        
+
                                                     </span><br/>
                                                     @endif
                                                     @endforeach</td>

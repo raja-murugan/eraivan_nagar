@@ -9,7 +9,7 @@
                         <div class="col-md-6">
                             <h4>Booking - Payment</h4>
                         </div>
-                        
+
                         <div class="col-md-6">
                             <div class="form-group mb-0 me-0"></div>
                             <a class="btn btn-primary" href="{{ route('booking.index') }}">Back</a>
@@ -22,7 +22,7 @@
                     <div class="card-body">
 
 
-   
+
                     <form class="row g-3 needs-validation" autocomplete="off" method="POST" action="{{ route('booking.paymentstore') }}" enctype="multipart/form-data">
                     @csrf
 
@@ -31,20 +31,21 @@
                         <div class="row">
                               <h6>Customer Details</h6><br/><br/>
 
-                              <div class="col-xl-4 col-sm-4">
+                              <div class="col-xl-12 col-sm-12" style="margin-top: 20px;">
                                  <div class="card crypto-main-card">
-                                    <div class="card-body"> 
-                                       <div class="deposit-wrap"> 
-                                       <div> 
+                                    <div class="card-body">
+                                       <div class="deposit-wrap">
+                                       <div>
                                           <h5>{{$BookingData->customername}}</h5>
-                                          <p>{{$BookingData->address}}, {{$BookingData->street}}, {{$BookingData->area}}<br/>{{$BookingData->city}} - {{$BookingData->pincode}}<br/>{{$BookingData->mobileno}}</p>
+                                          <p>{{$BookingData->address}}, {{$BookingData->street}}, {{$BookingData->area}}, {{$BookingData->city}} - {{$BookingData->pincode}}</p>
+                                          <p>Phone Number : <span>{{$BookingData->mobileno}}</span></p>
                                        </div>
                                        </div>
                                     </div>
                                  </div>
                               </div>
 
-                              
+
                         </div>
 
 
@@ -55,7 +56,7 @@
                               <div class="valid-feedback">Looks good!</div>
                            </div>
                         </div>
-                        
+
 
                         <div class="row" style="margin-bottom:40px;">
 
@@ -142,11 +143,11 @@
                                        </td>
                                        <td><input type="text" class="form-control payableamount" id="payableamount" name="payableamount"
                                                 placeholder="Payable Amount" required="" /></td>
-                                                
+
                                        <td><input type="text" class="form-control paymentbalance" id="balance" name="balance"
                                                 placeholder="" readonly value=""/></td>
                                     </tr>
-                                    
+
                                 </tbody>
                               </table>
                            </div>
@@ -156,7 +157,7 @@
 
 
 
-                      
+
 
                     <div class="col-md-12">
                         <button class="btn btn-primary" type="submit">Add</button>
