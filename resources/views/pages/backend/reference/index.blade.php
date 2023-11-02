@@ -48,18 +48,24 @@
                                                     <li class="edit">
                                                         <button class="btn btn-success active" type="button" title="btn btn-success active"
                                                             data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModalgetbootstrapedit"
+                                                            data-bs-target="#referenceModalgetbootstrapedit{{ $referencedata->unique_key }}"
                                                             data-whatever="@getbootstrap"> Edit</button>
-                                                        <div class="modal fade" id="exampleModalgetbootstrapedit"
+                                                        <div class="modal fade" id="referenceModalgetbootstrapedit{{ $referencedata->unique_key }}"
                                                             tabindex="-1" role="dialog"
-                                                            aria-labelledby="exampleModalgetbootstrapedit"
+                                                            aria-labelledby="referenceModalgetbootstrapedit{{ $referencedata->unique_key }}"
                                                             aria-hidden="true">
                                                             @include('pages.backend.reference.edit')
                                                         </div>
                                                     </li>
                                                     <li class="delete">
-                                                        <button class="btn btn-danger active" type="button"
-                                                            title="btn btn-danger active">Delete</button>
+                                                        <button class="btn " type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#refernceModalgetbootstrapdelete{{$referencedata->unique_key}}"
+                                                            data-whatever="@getbootstrap" style="background-color:#d32626;"> Delete</button>
+                                                        <div class="modal fade" id="refernceModalgetbootstrapdelete{{$referencedata->unique_key}}" tabindex="-1"
+                                                            role="dialog" aria-labelledby="refernceModalgetbootstrapdelete{{$referencedata->unique_key}}"
+                                                            aria-hidden="true">
+                                                            @include('pages.backend.reference.delete')
+                                                        </div>
                                                     </li>
                                                 </ul>
                                             </td>

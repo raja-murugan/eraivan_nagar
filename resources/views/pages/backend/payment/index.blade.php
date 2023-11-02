@@ -54,8 +54,14 @@
                                                         </div>
                                                     </li>
                                                     <li class="delete">
-                                                        <button class="btn btn-danger active" type="button"
-                                                            title="btn btn-danger active">Delete</button>
+                                                        <button class="btn " type="button" data-bs-toggle="modal"
+                                                            data-bs-target="#paymentModalgetbootstrapdelete{{$paymentdata->unique_key}}"
+                                                            data-whatever="@getbootstrap" style="background-color:#d32626;"> Delete</button>
+                                                        <div class="modal fade" id="paymentModalgetbootstrapdelete{{$paymentdata->unique_key}}" tabindex="-1"
+                                                            role="dialog" aria-labelledby="paymentModalgetbootstrapdelete{{$paymentdata->unique_key}}"
+                                                            aria-hidden="true">
+                                                            @include('pages.backend.payment.delete')
+                                                        </div>
                                                     </li>
                                                 </ul>
                                             </td>
