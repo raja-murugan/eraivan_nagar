@@ -33,21 +33,21 @@
                             </tr>
                             <tr class="border" style="border: 1px solid #d37088! important;">
                                 <td class="border" style="font-size:14px;border: 1px solid #d37088! important;color: #783545;">Customer Name : </td>
-                                <td class="" style="border: 1px solid #d37088! important;color: #783545;"><span style="font-weight:500;font-size:14px;">{{ $BookingData->customername }}</span></td>
+                                <td class="" style="border-bottom: 1px solid #d37088! important;color: #783545;"><span style="font-weight:500;font-size:14px;">{{ $BookingData->customername }}</span></td>
                             </tr>
                             <tr class="border" style="border: 1px solid #d37088! important;">
                                 <td class="border" style="font-size:14px;border: 1px solid #d37088! important;color: #783545;">Address : </td>
-                                <td class="" style="border: 1px solid #d37088! important;"><span style="font-weight:500;font-size:14px;color: #783545;">
+                                <td class="" style="border-bottom: 1px solid #d37088! important;"><span style="font-weight:500;font-size:14px;color: #783545;">
                                             {{ $BookingData->address }}, {{ $BookingData->street }}, {{ $BookingData->area }}, {{ $BookingData->city }} - {{ $BookingData->pincode }}
                                             </span></td>
                             </tr>
                             <tr class="border" style="border: 1px solid #d37088! important;">
                                 <td class="border" style="font-size:14px;border: 1px solid #d37088! important;color: #783545;">Contact Number : <span style="font-weight:500;font-size:14px;">{{ $BookingData->mobileno }}</span></td>
-                                <td class="" style="font-size:14px;border: 1px solid #d37088! important;color: #783545;">Project Name : <span style="font-weight:500;font-size:14px;"> ERAIVAN NAGAR </span></td>
+                                <td class="" style="font-size:14px;border-bottom: 1px solid #d37088! important;color: #783545;">Project Name : <span style="font-weight:500;font-size:14px;"> ERAIVAN NAGAR </span></td>
                             </tr>
                             <tr class="border" style="border: 1px solid #d37088! important;">
                                 <td class="border" style="font-size:14px;border: 1px solid #d37088! important;color: #783545;">Project Location : <span style="font-weight:500;font-size:14px;"> ARIYALUR </span></td>
-                                <td class="" style="font-size:14px;border: 1px solid #d37088! important;color: #783545;">Total Sqft : <span style="font-weight:500;">{{ $BookingPaymentdata->sqft }}</span></td>
+                                <td class="" style="font-size:14px;border-bottom: 1px solid #d37088! important;color: #783545;">Total Sqft : <span style="font-weight:500;">{{ $BookingPaymentdata->sqft }}</span></td>
                             </tr>
                         </table>
 
