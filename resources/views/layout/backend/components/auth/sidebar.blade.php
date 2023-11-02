@@ -34,10 +34,10 @@
                         </a>
                     </li>
                     <li class="sidebar-main-title">
-                    <div>
-                      <h6 class="lan-8">Applications</h6>
-                    </div>
-                  </li>
+                        <div>
+                            <h6 class="lan-8">Applications</h6>
+                        </div>
+                    </li>
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title" href="#">
                             <svg class="stroke-icon">
@@ -45,15 +45,16 @@
                             </svg>
                             <svg class="fill-icon">
                                 <use href="{{ asset('assets/backend/svg/icon-sprite.svg#stroke-calendar') }}"></use>
-                            </svg><span>Plot Booking           </span></a>
-                            <ul class="sidebar-submenu">
-                                <li><a href="{{ route('booking.index') }}">Booking</a></li>
-                                <li><a href="{{ route('booking.payment_receipt') }}">Receipt</a></li>
-                            </ul>
+                            </svg><span>Plot Booking </span></a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="{{ route('booking.index') }}">Booking</a></li>
+                            <li><a href="{{ route('booking.payment_receipt') }}">Receipt</a></li>
+                        </ul>
                         </a>
-                  </li>
+                    </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('plot.index') }}" class="{{ Route::is('plot.index') ? 'active' : '' }}">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('plot.index') }}"
+                            class="{{ Route::is('plot.index') ? 'active' : '' }}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/backend/svg/icon-sprite.svg#stroke-maps') }}"></use>
                             </svg>
@@ -74,8 +75,9 @@
                             <span>Reference</span>
                         </a>
                     </li>
-                    <li class="sidebar-list">  
-                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('payment.index') }}" class="{{ Route::is('payment.index') ? 'active' : '' }}">
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('payment.index') }}"
+                            class="{{ Route::is('payment.index') ? 'active' : '' }}">
                             <svg class="stroke-icon">
                                 <use href="{{ asset('assets/backend/svg/icon-sprite.svg#stroke-calendar') }}"></use>
                             </svg>

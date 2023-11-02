@@ -10,7 +10,7 @@
                         <div class="col-md-8">
                             <h4>Booking Receipt</h4>
                         </div>
-                        
+
                         <div class="col-md-4">
                             <div class="form-group mb-0 me-0"></div>
                             <form autocomplete="off" method="POST" action="{{ route('booking.receiptdatefilter') }}">
@@ -30,7 +30,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        
+
 
                            <div class="col-sm-12">
                                  <div class="table-responsive">
@@ -41,7 +41,7 @@
                                                 <th>Date</th>
                                                 <th>Plot No</th>
                                                 <th>Customer</th>
-                                                <th>Rate</th>
+                                                <th>Payment Amount</th>
                                                 <th>Payment Method</th>
                                                 <th>Action</th>
                                              </tr>
@@ -65,7 +65,7 @@
                                                                <a href="{{ route('booking.recept_print', ['unique_key' => $booking_receipt['unique_key']]) }}"
                                                                         class="btn" style="color: white;background-color:#043c11;">Print</a>
                                                                @endif
-                                                               
+
                                                                </li>
                                                                <li class="edit">
                                                                   <a href="{{ route('booking.recept_edit', ['unique_key' => $booking_receipt['unique_key']]) }}"

@@ -9,7 +9,7 @@
                         <div class="col-md-6">
                             <h4>New Booking</h4>
                         </div>
-                        
+
                         <div class="col-md-6">
                             <div class="form-group mb-0 me-0"></div>
                             <a class="btn btn-primary" href="{{ route('booking.index') }}">Back</a>
@@ -22,7 +22,7 @@
                     <div class="card-body">
 
 
-   
+
                     <form class="row g-3 needs-validation" autocomplete="off" method="POST" action="{{ route('booking.store') }}" enctype="multipart/form-data">
                     @csrf
 
@@ -119,7 +119,7 @@
                         <br/>
                      <h6 style="margin-top:30px;">Plot Details</h6>
 
-                       
+
                         <div class="row" style="margin-top:25px;">
                            <div class="table-responsive col-lg-10 col-sm-12 col-12">
                               <table class="table">
@@ -155,7 +155,7 @@
 
                                     <tr>
                                        <td>
-                                       <select class="form-select booking_block" id="booking_block2" name="booking_block[]" required="">
+                                       <select class="form-select booking_block" id="booking_block2" name="booking_block[]">
                                           <option selected="" disabled="" value="">Choose...</option>
                                              <option value="A">A</option>
                                              <option value="B">B</option>
@@ -166,20 +166,20 @@
                                        <td>
                                           <input type="hidden" id="bookingplot_id" name="bookingplot_id[]" />
                                             <select class="form-control js-example-basic-single plot_id select" name="plot_id[]"
-                                                id="plot_id2" required>
+                                                id="plot_id2">
                                                 <option selected="" disabled="" value="">Choose...</option>
                                             </select>
                                        </td>
                                        <td><input type="text" class="form-control square_feet" id="square_feet2" name="square_feet[]"
                                                 placeholder="Square Feet" value="" readonly />
                                              <input type="hidden" class="form-control plot_no" id="plot_no2" name="plot_no[]"/></td>
-                                       <td><button style="width: 35px;background: #9c2b24;"class="py-1 text-white remove-extratr font-medium rounded-lg 
-                                             text-sm  text-center btn" type="button" id="" value="Add">-</button></td>
+                                       {{-- <td><button style="width: 35px;background: #9c2b24;"class="py-1 text-white remove-extratr font-medium rounded-lg
+                                             text-sm  text-center btn" type="button" id="" value="Add">-</button></td> --}}
                                     </tr>
 
                                     <tr>
                                        <td>
-                                       <select class="form-select booking_block" id="booking_block3" name="booking_block[]" required="">
+                                       <select class="form-select booking_block" id="booking_block3" name="booking_block[]">
                                           <option selected="" disabled="" value="">Choose...</option>
                                              <option value="A">A</option>
                                              <option value="B">B</option>
@@ -190,20 +190,20 @@
                                        <td>
                                           <input type="hidden" id="bookingplot_id" name="bookingplot_id[]" />
                                             <select class="form-control js-example-basic-single plot_id select" name="plot_id[]"
-                                                id="plot_id3" required>
+                                                id="plot_id3">
                                                 <option selected="" disabled="" value="">Choose...</option>
                                             </select>
                                        </td>
                                        <td><input type="text" class="form-control square_feet" id="square_feet3" name="square_feet[]"
                                                 placeholder="Square Feet" value="" readonly />
                                              <input type="hidden" class="form-control plot_no" id="plot_no3" name="plot_no[]"/></td>
-                                       <td><button style="width: 35px;background: #9c2b24;"class="py-1 text-white remove-extratr font-medium rounded-lg 
-                                             text-sm  text-center btn" type="button" id="" value="Add">-</button></td>
+                                       {{-- <td><button style="width: 35px;background: #9c2b24;"class="py-1 text-white remove-extratr font-medium rounded-lg
+                                             text-sm  text-center btn" type="button" id="" value="Add">-</button></td> --}}
                                     </tr>
 
                                     <tr>
                                        <td>
-                                       <select class="form-select booking_block" id="booking_block4" name="booking_block[]" required="">
+                                       <select class="form-select booking_block" id="booking_block4" name="booking_block[]">
                                           <option selected="" disabled="" value="">Choose...</option>
                                              <option value="A">A</option>
                                              <option value="B">B</option>
@@ -214,19 +214,19 @@
                                        <td>
                                           <input type="hidden" id="bookingplot_id" name="bookingplot_id[]" />
                                             <select class="form-control js-example-basic-single plot_id select" name="plot_id[]"
-                                                id="plot_id4" required>
+                                                id="plot_id4">
                                                 <option selected="" disabled="" value="">Choose...</option>
                                             </select>
                                        </td>
                                        <td><input type="text" class="form-control square_feet" id="square_feet4" name="square_feet[]"
                                                 placeholder="Square Feet" value="" readonly />
                                              <input type="hidden" class="form-control plot_no" id="plot_no4" name="plot_no[]"/></td>
-                                       <td><button style="width: 35px;background: #9c2b24;"class="py-1 text-white remove-extratr font-medium rounded-lg 
-                                             text-sm  text-center btn" type="button" id="" value="Add">-</button></td>
+                                       {{-- <td><button style="width: 35px;background: #9c2b24;"class="py-1 text-white remove-extratr font-medium rounded-lg
+                                             text-sm  text-center btn" type="button" id="" value="Add">-</button></td> --}}
                                     </tr>
 
 
-                                    
+
 
                                 </tbody>
                               </table>
