@@ -347,9 +347,9 @@ class BookingController extends Controller
         if($lastbill != '')
         {
             $added_billno = substr ($lastbill->bill_no, -2);
-            $new_bill = 'RTC0' . ($added_billno) + 1;
+            $new_bill = '0' . ($added_billno) + 1;
         }else {
-            $new_bill = 'RTC0' . $s_bill_no;
+            $new_bill = '0' . $s_bill_no;
         }
 
         $BookingPayment = new BookingPayment();
