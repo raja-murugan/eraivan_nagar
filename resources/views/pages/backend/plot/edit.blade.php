@@ -25,19 +25,25 @@
                     <div class="col-md-12">
                         <label class="form-label">Block <span style="color: red">*</span></label>
                         <select class="form-select" id="publishStatus" name="block" required="">
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
+                            <option selected="" disabled="" value="">Choose...</option>
+                            <option value="A"@if ('A' === $plotdata->block) selected='selected' @endif>A</option>
+                            <option value="B"@if ('B' === $plotdata->block) selected='selected' @endif>B</option>
+                            <option value="C"@if ('C' === $plotdata->block) selected='selected' @endif>C</option>
+                            <option value="D"@if ('D' === $plotdata->block) selected='selected' @endif>D</option>
                         </select>
                     </div>
                     <div class="col-md-12">
                         <label class="form-label" style="margin-top: 10px">Facing <span style="color: red">*</span></label>
                         <select class="form-select" id="publishStatus" name="facing" required="">
-                            <option>North</option>
-                            <option>South</option>
-                            <option>East</option>
-                            <option>West</option>
+                            <option selected="" disabled="" value="">Choose...</option>
+                            <option value="North" @if ('North' === $plotdata->facing) selected='selected' @endif>North</option>
+                            <option value="South" @if ('South' === $plotdata->facing) selected='selected' @endif>South</option>
+                            <option value="East" @if ('East' === $plotdata->facing) selected='selected' @endif>East</option>
+                            <option value="West" @if ('West' === $plotdata->facing) selected='selected' @endif>West</option>
+                            <option value="North East" @if ('North East' === $plotdata->facing) selected='selected' @endif>North East</option>
+                            <option value="North West" @if ('North West' === $plotdata->facing) selected='selected' @endif>North West</option>
+                            <option value="South East" @if ('South East' === $plotdata->facing) selected='selected' @endif>South East</option>
+                            <option value="South West" @if ('South West' === $plotdata->facing) selected='selected' @endif>South West</option>
                         </select>
                     </div>
                     <div class="col-md-12" style="margin-top: 50px;">

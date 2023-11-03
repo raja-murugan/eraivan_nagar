@@ -44,11 +44,11 @@
                                                     <li class="edit">
                                                         <button class="btn btn-success active" type="button" title="btn btn-success active"
                                                             data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModalgetbootstrapedit"
+                                                            data-bs-target="#exampleModalgetbootstrapedit{{$paymentdata->unique_key}}"
                                                             data-whatever="@getbootstrap"> Edit</button>
-                                                        <div class="modal fade" id="exampleModalgetbootstrapedit"
+                                                        <div class="modal fade" id="exampleModalgetbootstrapedit{{$paymentdata->unique_key}}"
                                                             tabindex="-1" role="dialog"
-                                                            aria-labelledby="exampleModalgetbootstrapedit"
+                                                            aria-labelledby="exampleModalgetbootstrapedit{{$paymentdata->unique_key}}"
                                                             aria-hidden="true">
                                                             @include('pages.backend.payment.edit')
                                                         </div>

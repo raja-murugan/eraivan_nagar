@@ -53,10 +53,10 @@
                                                     @endif
                                                 </div>
                                                 <button class="btn btn-success" type="button" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalgetbootstrapedit"
+                                                    data-bs-target="#plotModalgetbootstrapedit{{ $plotdata->unique_key }}"
                                                     data-whatever="@getbootstrap"> Edit</button>
-                                                <div class="modal fade" id="exampleModalgetbootstrapedit" tabindex="-1"
-                                                    role="dialog" aria-labelledby="exampleModalgetbootstrapedit"
+                                                <div class="modal fade" id="plotModalgetbootstrapedit{{ $plotdata->unique_key }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="plotModalgetbootstrapedit{{ $plotdata->unique_key }}"
                                                     aria-hidden="true">
                                                     @include('pages.backend.plot.edit')
                                                 </div>
