@@ -64,7 +64,7 @@
                               <div class="col-2"><span style="margin-left:20px;font-size:17px;color:#4343a7;">Plot No</span></div>
                               <div class="col-4" style="border-bottom: 1px solid #4343a7;"><span style="font-weight:500;font-size:17px;">{{$BookingPaymentdata->plot_no}}</span></div>
                               <div class="col-2"><span style="margin-left:20px;font-size:17px;color:#4343a7;">Reference</span></div>
-                              <div class="col-3" style="border-bottom: 1px solid #4343a7;"><span style="font-weight:500;font-size:17px;">{{$reference->name}}</span></div>
+                              <div class="col-3" style="border-bottom: 1px solid #4343a7;"><span style="font-weight:500;font-size:17px;"></span></div>
                            </div>
                            <br/><br/>
                            <div class="row">
@@ -130,7 +130,7 @@
                               <div class="col-2"><span style="margin-left:20px;font-size:17px;color:#4343a7;">Plot No</span></div>
                               <div class="col-4" style="border-bottom: 1px solid #4343a7;"><span style="font-weight:500;font-size:17px;">{{$BookingPaymentdata->plot_no}}</span></div>
                               <div class="col-2"><span style="margin-left:20px;font-size:17px;color:#4343a7;">Reference</span></div>
-                              <div class="col-3" style="border-bottom: 1px solid #4343a7;"><span style="font-weight:500;font-size:17px;">{{$reference->name}}</span></div>
+                              <div class="col-3" style="border-bottom: 1px solid #4343a7;"><span style="font-weight:500;font-size:17px;"></span></div>
                            </div>
                            <br/><br/>
                            <div class="row">

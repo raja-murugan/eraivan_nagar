@@ -455,7 +455,7 @@ class BookingController extends Controller
         $BookingPaymentdata = BookingPayment::where('unique_key', '=', $unique_key)->first();
         $BookingData = Booking::findOrFail($BookingPaymentdata->booking_id);
         $today = Carbon::now()->format('Y-m-d');
-        $total = number_format($BookingPaymentdata->totalamount);
+        $total = number_format($BookingPaymentdata->payableamount);
 
 
         function AmountInWords(float $amount)
@@ -496,7 +496,7 @@ class BookingController extends Controller
         return ($implode_to_Rupees ? $implode_to_Rupees . 'Rupees ' : '') . $get_paise;
         }
 
-        $get_amount= AmountInWords($BookingPaymentdata->totalamount);
+        $get_amount= AmountInWords($BookingPaymentdata->payableamount);
 
         return view('pages.backend.booking.recept_print', compact('BookingPaymentdata', 'today', 'BookingData', 'total', 'get_amount'));
     }
@@ -508,7 +508,7 @@ class BookingController extends Controller
         $today = Carbon::now()->format('Y-m-d');
         $BookingData = Booking::findOrFail($BookingPaymentdata->booking_id);
         $reference = Reference::findOrFail($BookingData->reference);
-        $total = number_format($BookingPaymentdata->totalamount);
+        $total = number_format($BookingPaymentdata->payableamount);
 
 
         function AmountInWords(float $amount)
@@ -549,7 +549,7 @@ class BookingController extends Controller
         return ($implode_to_Rupees ? $implode_to_Rupees . 'Rupees ' : '') . $get_paise;
         }
 
-        $get_amount= AmountInWords($BookingPaymentdata->totalamount);
+        $get_amount= AmountInWords($BookingPaymentdata->payableamount);
 
 
         return view('pages.backend.booking.receptcash_print', compact('BookingPaymentdata', 'today', 'BookingData', 'total', 'get_amount', 'reference'));
