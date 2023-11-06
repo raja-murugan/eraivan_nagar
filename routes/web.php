@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PlotController;
 use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\FrontendController;
@@ -23,11 +24,12 @@ Route::get('/benefits', [FrontendController::class, 'benefits'])->name('benefits
 Route::get('/amenities', [FrontendController::class, 'amenities'])->name('amenities');
 Route::get('/gallery', [FrontendController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
+Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
 
 Auth::routes();
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    
+
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     // BOOKING CONTROLLER
@@ -76,7 +78,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         // DELETE
         Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/plot/delete/{unique_key}', [PlotController::class, 'delete'])->name('plot.delete');
     });
-    
+
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         // INDEX
         Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/reference', [ReferenceController::class, 'index'])->name('reference.index');

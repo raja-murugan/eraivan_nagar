@@ -50,31 +50,32 @@
                                         <div class="tab-content pb-10">
                                             <div class="tab-pane fade active show" id="ltn__form_tab_1_1">
                                                 <div class="car-dealer-form-inner">
-                                                    <form action="#" class="ltn__car-dealer-form-box row">
+                                                    <form class="ltn__car-dealer-form-box row" autocomplete="off" method="POST" action="{{ route('contact.store') }}">
+                                                        @csrf
                                                         <div
                                                             class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-meter col-lg-12 col-md-12">
-                                                            <input type="text" name="name"
+                                                            <input type="text" name="name" required
                                                                 placeholder="Enter your name *">
                                                         </div>
                                                         <div
                                                             class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-meter col-lg-12 col-md-12">
-                                                            <input type="email" name="email"
+                                                            <input type="email" name="email" required
                                                                 placeholder="Enter email address">
                                                         </div>
                                                         <div
                                                             class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-meter col-lg-12 col-md-12">
-                                                            <input type="text" name="phone"
+                                                            <input type="text" name="phone" required
                                                                 placeholder="Enter phone number *">
                                                         </div>
                                                         <div
                                                             class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-meter col-lg-12 col-md-12">
-                                                            <input type="text" name="area"
+                                                            <input type="text" name="area" required
                                                                 placeholder="Enter your area *">
                                                         </div>
                                                         <div
                                                             class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-12 col-md-12">
                                                             <div class="btn-wrapper text-center mt-0">
-                                                                <button type="submit"
+                                                                <button type="submit" id="adresponce"
                                                                     style="width: -moz-available; border-radius: 10px;"
                                                                     class="btn theme-btn-1 btn-effect-1 text-uppercase">
                                                                     Book Now</button>
