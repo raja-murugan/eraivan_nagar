@@ -7,12 +7,15 @@
             <div class="col-md-12 project-list" style="margin-top: 30px;">
                 <div class="card">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-7">
                             <h4>Booking Receipt</h4>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-5">
+                            
                             <div class="form-group mb-0 me-0"></div>
+                            
+                            <a class="btn btn-primary" href="{{ route('booking.payment_create') }}">Add Payment</a>
                             <form autocomplete="off" method="POST" action="{{ route('booking.receiptdatefilter') }}">
                                 @method('PUT')
                                 @csrf

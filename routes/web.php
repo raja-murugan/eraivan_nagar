@@ -6,6 +6,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PlotController;
 use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,6 +68,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/booking/recept_edit/{unique_key}', [BookingController::class, 'recept_edit'])->name('booking.recept_edit');
         // UPDATE
         Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/booking/recept_update/{unique_key}', [BookingController::class, 'recept_update'])->name('booking.recept_update');
+        // CREATE
+        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/booking/payment_create', [BookingController::class, 'payment_create'])->name('booking.payment_create');
+        // PAYMENT STORE
+        Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/booking/payment_store', [BookingController::class, 'payment_store'])->name('booking.payment_store');
     });
 
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {
@@ -77,6 +83,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/plot/edit/{unique_key}', [PlotController::class, 'edit'])->name('plot.edit');
         // DELETE
         Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/plot/delete/{unique_key}', [PlotController::class, 'delete'])->name('plot.delete');
+        // DELETE
+        Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/plot/status_update/{unique_key}', [PlotController::class, 'status_update'])->name('plot.status_update');
+        // DELETE
+        Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/plot/status_update_edit/{unique_key}', [PlotController::class, 'status_update_edit'])->name('plot.status_update_edit');
     });
 
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {
@@ -100,9 +110,41 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         // DELETE
         Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/payment/delete/{unique_key}', [PaymentController::class, 'delete'])->name('payment.delete');
     });
+
+
+    Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+        // INDEX
+        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/expense', [ExpenseController::class, 'index'])->name('expense.index');
+        // STORE
+        Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/expense/store', [ExpenseController::class, 'store'])->name('expense.store');
+        // EDIT
+        Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/expense/edit/{unique_key}', [ExpenseController::class, 'edit'])->name('expense.edit');
+        // DELETE
+        Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/expense/delete/{unique_key}', [ExpenseController::class, 'delete'])->name('expense.delete');
+    });
+
+
+    Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+        // INDEX
+        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/visitor', [VisitorController::class, 'index'])->name('visitor.index');
+        // STORE
+        Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/visitor/store', [VisitorController::class, 'store'])->name('visitor.store');
+        // EDIT
+        Route::middleware(['auth:sanctum', 'verified'])->post('/zworktech-eraivannagar/visitor/edit/{unique_key}', [VisitorController::class, 'edit'])->name('visitor.edit');
+        // DELETE
+        Route::middleware(['auth:sanctum', 'verified'])->put('/zworktech-eraivannagar/visitor/delete/{unique_key}', [VisitorController::class, 'delete'])->name('visitor.delete');
+    });
+
+
+    Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+        // INDEX
+        Route::middleware(['auth:sanctum', 'verified'])->get('/zworktech-eraivannagar/contactus', [ContactController::class, 'index'])->name('contactus.index');
+    });
 });
 
 
 
 Route::get('/Getplots', [PlotController::class, 'Getplots']);
 Route::get('/Getplotsqarefeet', [PlotController::class, 'Getplotsqarefeet']);
+Route::get('/plotsforPayment', [PlotController::class, 'plotsforPayment']);
+Route::get('/GetPlotsBookedDetails', [PlotController::class, 'GetPlotsBookedDetails']);

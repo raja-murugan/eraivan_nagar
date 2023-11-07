@@ -300,13 +300,120 @@
       
 
        
+                $('.payment_block').on('change', function() {
+                var booking_block = this.value;
+                    $.ajax({
+                        url: '/plotsforPayment/',
+                        type: 'get',
+                        data: {
+                                _token: "{{ csrf_token() }}",
+                                booking_block: booking_block
+                            },
+                        dataType: 'json',
+                        success: function(response) {
+                            //
+                            console.log(response);
+                            if (response.status !== 'false') {
+                                $('.payment_plotid').empty();
+                                var $select = $('.payment_plotid').append(
+                                    $('<option>', {
+                                        value: '0',
+                                        text: 'Choose..'
+                                    }));
+                                $('.payment_plotid').append($select);
 
+                                var len = response['data'].length;
+                                if (len > 0) {
+                                    for (var i = 0; i < len; i++) {
+
+                                        $('.payment_plotid').append($('<option>', {
+                                            value: response['data'][i].id,
+                                            text: response['data'][i].plot_no
+                                        }));
+                                    }
+                                }
+                            } else {
+                                $('.payment_plotid').empty();
+                            }
+                        }
+                    });
+                });
+
+
+                $('.payment_plotid').on('change', function() {
+                    var plot_id = this.value;
+                    console.log(plot_id);
+                    $.ajax({
+                        url: '/GetPlotsBookedDetails/',
+                        type: 'get',
+                        data: {
+                                _token: "{{ csrf_token() }}",
+                                plot_id: plot_id
+                            },
+                        dataType: 'json',
+                        success: function(response) {
+                            console.log(response);
+                            if (response.status !== 'false') {
+                                
+                                $(".payment_div").show();
+
+                                var len = response.length;
+                                if (len > 0) {
+                                    for (var i = 0; i < len; i++) {
+                                        $('.payment_customername').html(response[i].customername);
+                                        $('.payment_address').html(response[i].address);
+                                        $('.payment_mobileno').html(response[i].mobileno);
+                                        $('#payment_sqft').val(response[i].square_feet);
+                                        $('#payment_ratepersqft').val(response[i].ratepersqft);
+                                        $('#payment_total').val(response[i].total);
+                                        $('#payment_paidamount').val(response[i].paid_amount);
+                                        $('#payment_balanceamount').val(response[i].balance_amount);
+                                        $('#payment_bookingid').val(response[i].booking_id);
+                                        $('#payment_plotno').val(response[i].plot_no);
+
+                                        $('#bookingoldplot_fields').html('');
+                                        var paid_terms = response[i].paid_terms.length;
+                                        for (var j = 0; j < paid_terms; j++) {
+                                            
+                                            var column_0 = $('<td/>', {
+                                                html: '<input type="text" class="form-control" style="background: #f4f4f4;" readonly value="' + response[i].paid_terms[j].bill_no +'"/>' ,
+                                            });
+                                            var column_1 = $('<td/>', {
+                                                html: '<input type="text" class="form-control" style="background: #f4f4f4;" readonly value="' + response[i].paid_terms[j].payment_method +'"/>',
+                                            });
+                                            var column_2 = $('<td/>', {
+                                                html: '<input type="text" class="form-control" style="background: #f4f4f4;" readonly value="' + response[i].paid_terms[j].terms +'"/>',
+                                            });
+                                            var column_3 = $('<td/>', {
+                                                html: '<input type="text" class="form-control" style="background: #f4f4f4;" readonly value="' + response[i].paid_terms[j].payableamount +'"/>',
+                                            });
+
+                                            var row = $('<tr/>').append(column_0,
+                                                column_1, column_2, column_3);
+
+                                            $('#bookingoldplot_fields').append(row);
+                                        }
+
+
+                                        if(response[i].balance_amount > 0){
+                                            $(".booking_new").show();
+                                        }else {
+                                            $(".booking_new").hide();
+                                        }
+                                        
+                                    }
+                                }
+                            }else {
+                                alert("These Plot not booked...");
+                            }
+                        }
+                    });
+                });
 
         $(document).on('click', '.remove-extratr', function() {
             $(this).parents('tr').remove();
         });
    });
-
 
 
 
@@ -326,6 +433,26 @@
             if (Number(payableamount) > Number(bookingtotal_balance)) {
                 alert('!Paid Amount is More than of Total!');
                 $(".paidamount").val('');
+            }
+    });
+
+
+   $(document).on("keyup", 'input.payment_payableamount', function() {
+        var payment_payableamount = $(this).val();
+        var bookingtotal_balance = $("#payment_balanceamount").val();
+        //alert(bill_paid_amount);
+        var balance_amount = Number(bookingtotal_balance) - Number(payment_payableamount);
+        $('.payment_balance').val(balance_amount.toFixed(2));
+    });
+
+
+    $(document).on("keyup", 'input.payment_payableamount', function() {
+            var payableamount = $(this).val();
+            var payment_balanceamount = $(".payment_balanceamount").val();
+
+            if (Number(payableamount) > Number(payment_balanceamount)) {
+                alert('!Paid Amount is More than of Total!');
+                $(".payment_payableamount").val('');
             }
     });
 

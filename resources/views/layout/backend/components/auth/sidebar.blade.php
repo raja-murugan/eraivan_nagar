@@ -87,6 +87,42 @@
                             <span>Payment Method</span>
                         </a>
                     </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('expense.index') }}"
+                            class="{{ Route::is('expense.index') ? 'active' : '' }}">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('assets/backend/svg/icon-sprite.svg#stroke-calendar') }}"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('assets/backend/svg/icon-sprite.svg#fill-calendar') }}"></use>
+                            </svg>
+                            <span>Expense</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('visitor.index') }}"
+                            class="{{ Route::is('visitor.index') ? 'active' : '' }}">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('assets/backend/svg/icon-sprite.svg#stroke-calendar') }}"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('assets/backend/svg/icon-sprite.svg#fill-calendar') }}"></use>
+                            </svg>
+                            <span>Visitor</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('contactus.index') }}"
+                            class="{{ Route::is('contactus.index') ? 'active' : '' }}">
+                            <svg class="stroke-icon">
+                                <use href="{{ asset('assets/backend/svg/icon-sprite.svg#stroke-calendar') }}"></use>
+                            </svg>
+                            <svg class="fill-icon">
+                                <use href="{{ asset('assets/backend/svg/icon-sprite.svg#fill-calendar') }}"></use>
+                            </svg>
+                            <span>Contact Us</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

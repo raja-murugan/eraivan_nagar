@@ -47,11 +47,25 @@
                                                 </div>
                                                 <div class="avaiabilty">
                                                     @if ($plotdata->status == 'open')
-                                                        <div class="text-success">{{ $plotdata->status }}</div>
-                                                    @else
-                                                        <div class="text-danger">{{ $plotdata->status }}</div>
+
+                                                        <button class=" btn-warning" data-bs-toggle="modal"
+                                                    data-bs-target="#statusModalgetbootstrap{{ $plotdata->unique_key }}"
+                                                    data-whatever="@statusModalgetbootstrap{{ $plotdata->unique_key }}">{{ $plotdata->status }}</button>
+
+                                                    @elseif ($plotdata->status == '2')
+
+                                                    <button class=" btn-danger" data-bs-toggle="modal"
+                                                    data-bs-target="#statusModaleditbootstrap{{ $plotdata->unique_key }}"
+                                                    data-whatever="@statusModaleditbootstrap{{ $plotdata->unique_key }}">Blocked</button>
+
+                                                    @else   
+
+                                                        <div class="text-danger">{{ $plotdata->status }}</div> 
+
                                                     @endif
-                                                </div>
+                                                </div><br/> 
+
+
                                                 <button class="btn btn-success" type="button" data-bs-toggle="modal"
                                                     data-bs-target="#plotModalgetbootstrapedit{{ $plotdata->unique_key }}"
                                                     data-whatever="@getbootstrap"> Edit</button>
@@ -59,6 +73,16 @@
                                                     role="dialog" aria-labelledby="plotModalgetbootstrapedit{{ $plotdata->unique_key }}"
                                                     aria-hidden="true">
                                                     @include('pages.backend.plot.edit')
+                                                </div>
+                                                <div class="modal fade" id="statusModalgetbootstrap{{ $plotdata->unique_key }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="statusModalgetbootstrap{{ $plotdata->unique_key }}"
+                                                    aria-hidden="true">
+                                                    @include('pages.backend.plot.status_update')
+                                                </div>
+                                                <div class="modal fade" id="statusModaleditbootstrap{{ $plotdata->unique_key }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="statusModaleditbootstrap{{ $plotdata->unique_key }}"
+                                                    aria-hidden="true">
+                                                    @include('pages.backend.plot.status_update_edit')
                                                 </div>
                                             </div>
                                         </div>

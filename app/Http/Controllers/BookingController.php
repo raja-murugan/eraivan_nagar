@@ -319,6 +319,15 @@ class BookingController extends Controller
         return redirect()->route('booking.index')->with('warning', 'Deleted !');
     }
 
+    public function payment_create()
+    {
+        $Plot = Plot::where('status', '=', 'open')->where('soft_delete', '!=', 1)->get();
+        $Payment = Payment::where('soft_delete', '!=', 1)->get();
+        $today = Carbon::now()->format('Y-m-d');
+
+        return view('pages.backend.booking.payment_create', compact('Payment', 'Plot', 'today'));
+    }
+
 
     public function payment($plotid, $booking_id)
     {
@@ -382,6 +391,54 @@ class BookingController extends Controller
         $GetBooking->update();
 
         return redirect()->route('booking.index')->with('message', 'Payment  added successfully!');
+    }
+
+
+
+    public function payment_store(Request $request)
+    {
+        $beprandomkey = Str::random(5);
+
+        $s_bill_no = 1;
+        $lastbill = BookingPayment::where('soft_delete', '!=', 1)->latest('id')->first();
+        if($lastbill != '')
+        {
+            $added_billno = substr ($lastbill->bill_no, -2);
+            $new_bill = '0' . ($added_billno) + 1;
+        }else {
+            $new_bill = '0' . $s_bill_no;
+        }
+
+        $BookingPayment = new BookingPayment();
+        $BookingPayment->unique_key = $beprandomkey;
+        $BookingPayment->booking_id = $request->get('payment_bookingid');
+        $BookingPayment->plot_id = $request->get('payment_plotid');
+        $BookingPayment->date = $request->get('payment_date');
+        $BookingPayment->bill_no = $new_bill;
+        $BookingPayment->block = $request->get('payment_block');
+        $BookingPayment->plot_no = $request->get('payment_plotno');
+        $BookingPayment->sqft = $request->get('payment_sqft');
+        $BookingPayment->ratepersqft = $request->get('payment_ratepersqft');
+        $BookingPayment->totalamount = $request->get('payment_total');
+        $BookingPayment->payment_method = $request->get('payment_method');
+        $BookingPayment->terms = $request->get('payment_terms');
+        $BookingPayment->payableamount = $request->get('payableamount');
+        $BookingPayment->save();
+
+
+        $booking_id = $request->get('payment_bookingid');
+        $plot_id = $request->get('payment_plotid');
+
+        $GetBooking = BookingPlot::where('booking_id', '=', $booking_id)->where('plot_id', '=', $plot_id)->first();
+
+        $newpaid = $GetBooking->paid_amount + $request->get('payableamount');
+        $balance = $GetBooking->total - $newpaid;
+
+        $GetBooking->paid_amount = $newpaid;
+        $GetBooking->balance_amount = $balance;
+        $GetBooking->update();
+
+        return redirect()->route('booking.payment_receipt')->with('message', 'Payment  added successfully!');
     }
 
 
@@ -607,7 +664,7 @@ class BookingController extends Controller
         $BookingPayment_Data->payableamount = $request->get('payableamount');
         $BookingPayment_Data->update();
 
-        return redirect()->route('booking.index')->with('info', 'Updated !');
+        return redirect()->route('booking.payment_receipt')->with('info', 'Updated !');
     }
 
 

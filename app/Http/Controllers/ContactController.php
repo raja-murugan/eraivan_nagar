@@ -20,4 +20,11 @@ class ContactController extends Controller
 
         return redirect()->back();
     }
+
+
+    public function index()
+    {
+        $data = Contact::All();
+        return view('pages.backend.contactus.index', compact('data'));
+    }
 }
