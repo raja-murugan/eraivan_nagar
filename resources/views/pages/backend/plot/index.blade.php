@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <div class="row g-sm-4 g-3">
                             @foreach ($data as $keydata => $plotdata)
-                                <div class="col-xl-3 col-md-6">
+                                <div class="col-xl-2 col-md-4">
                                     <div class="prooduct-details-box">
                                         <div class="media">
                                             <div class="media-body ms-3">
