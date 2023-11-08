@@ -7,11 +7,11 @@
             <div class="col-md-12 project-list" style="margin-top: 30px;">
                 <div class="card">
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-6">
                             <h4>Booking Receipt</h4>
                         </div>
 
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             
                             <div class="form-group mb-0 me-0"></div>
                             

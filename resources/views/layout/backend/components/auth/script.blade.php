@@ -405,6 +405,7 @@
                                 }
                             }else {
                                 alert("These Plot not booked...");
+                                $(".booking_new").hide();
                             }
                         }
                     });
